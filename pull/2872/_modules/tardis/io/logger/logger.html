@@ -134,11 +134,8 @@
 import os
 import re
 from dataclasses import dataclass, field
-
 import panel as pn
 from IPython.display import display
-
-pn.extension()
 
 PYTHON_WARNINGS_LOGGER = logging.getLogger(&quot;py.warnings&quot;)
 
@@ -183,19 +180,25 @@ def create_output_widget(height=300):
     )</div>
 
 
+if get_environment() == &#39;vscode&#39;:
+    pn.extension()
+else:
+    pn.extension(comms=&#39;ipywidgets&#39;)
+
 log_outputs = {
     &quot;WARNING/ERROR&quot;: create_output_widget(),
     &quot;INFO&quot;: create_output_widget(),
     &quot;DEBUG&quot;: create_output_widget(),
     &quot;ALL&quot;: create_output_widget(),
 }
-
 tab_order = [&quot;ALL&quot;, &quot;WARNING/ERROR&quot;, &quot;INFO&quot;, &quot;DEBUG&quot;]
 logger_widget = pn.Tabs(
     *[(title, log_outputs[title]) for title in tab_order],
     height=350,
     sizing_mode=&#39;stretch_width&#39;
 )
+if get_environment() == &#39;vscode&#39;:
+    display(logger_widget)
 
 <div class="viewcode-block" id="LoggingConfig">
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.LoggingConfig">[docs]</a>
@@ -228,16 +231,14 @@ LOGGING_LEVELS = LoggingConfig().LEVELS
 <div class="viewcode-block" id="AsyncEmitLogHandler">
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.AsyncEmitLogHandler">[docs]</a>
 class AsyncEmitLogHandler(logging.Handler):
-    def __init__(self, log_outputs, colors, display_widget=True):
+    def __init__(self, log_outputs, colors, display_widget=True, display_handle=None, logger_widget=None):
         super().__init__()
         self.log_outputs = log_outputs
         self.colors = colors
         self.environment = get_environment()
         self.display_widget = display_widget
-
-        # Only set up display handle for Jupyter
-        if self.display_widget and self.environment == &#39;jupyter&#39;:
-            self.display_handle = display(logger_widget, display_id=True)
+        self.display_handle = display_handle
+        self.logger_widget = logger_widget
 
 <div class="viewcode-block" id="AsyncEmitLogHandler.emit">
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.AsyncEmitLogHandler.emit">[docs]</a>
@@ -294,15 +295,19 @@ class AsyncEmitLogHandler(logging.Handler):
 
         # Update Jupyter display if in jupyter environment
         if self.environment == &#39;jupyter&#39;:
-            self.display_handle.update(logger_widget.embed())</div>
+            self.display_handle.update(self.logger_widget)</div>
+
 
 
 <div class="viewcode-block" id="TARDISLogger">
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.TARDISLogger">[docs]</a>
 class TARDISLogger:
-    def __init__(self):
+    def __init__(self, display_handle=None, logger_widget=None, log_outputs=None):
         self.config = LoggingConfig()
         self.logger = logging.getLogger(&quot;tardis&quot;)
+        self.display_handle = display_handle
+        self.logger_widget = logger_widget
+        self.log_outputs = log_outputs
 
 <div class="viewcode-block" id="TARDISLogger.configure_logging">
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.TARDISLogger.configure_logging">[docs]</a>
@@ -368,9 +373,11 @@ class TARDISLogger:
             Whether to display the widget in GUI environments (default: True)
         &quot;&quot;&quot;
         self.widget_handler = AsyncEmitLogHandler(
-            log_outputs,
-            self.config.COLORS,
-            display_widget=display_widget
+            log_outputs=self.log_outputs,
+            colors=self.config.COLORS,
+            display_widget=display_widget,
+            display_handle=self.display_handle,
+            logger_widget=self.logger_widget
         )
         self.widget_handler.setFormatter(
             logging.Formatter(&quot;%(name)s [%(levelname)s] %(message)s (%(filename)s:%(lineno)d)&quot;)
@@ -395,7 +402,6 @@ class TARDISLogger:
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.LogFilter">[docs]</a>
 class LogFilter:
     &quot;&quot;&quot;Filter for controlling which log levels are displayed.&quot;&quot;&quot;
-
     def __init__(self, log_levels):
         self.log_levels = log_levels
 
@@ -409,15 +415,18 @@ class LogFilter:
 <div class="viewcode-block" id="logging_state">
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.logging_state">[docs]</a>
 def logging_state(log_level, tardis_config, specific_log_level=None, display_logging_widget=True):
-    logger = TARDISLogger()
+    if display_logging_widget and get_environment() == &#39;jupyter&#39;:
+        display_handle = display(logger_widget, display_id=&quot;logger_widget&quot;)
+    elif display_logging_widget and get_environment() == &#39;vscode&#39;:
+        display_handle = None
+    else:
+        display_handle = None
+    logger = TARDISLogger(display_handle=display_handle, logger_widget=logger_widget, log_outputs=log_outputs)
     logger.configure_logging(log_level, tardis_config, specific_log_level)
     logger.setup_widget_logging(display_widget=display_logging_widget)
-
-    if display_logging_widget and get_environment() == &#39;vscode&#39;:
-        display(logger_widget)
-
     return logger_widget if (display_logging_widget and get_environment() in [&#39;jupyter&#39;, &#39;vscode&#39;]) else None</div>
 
+ 
 </pre></div>
 
            </div>
@@ -428,7 +437,7 @@ def logging_state(log_level, tardis_config, specific_log_level=None, display_log
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2024, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 11 Dec 2024.
+      <span class="lastupdated">Last updated on 16 Dec 2024.
       </span></p>
   </div>
 
