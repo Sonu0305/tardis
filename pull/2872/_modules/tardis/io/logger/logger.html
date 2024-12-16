@@ -136,11 +136,13 @@ import re
 from dataclasses import dataclass, field
 import panel as pn
 from IPython.display import display
+from functools import lru_cache
 
 PYTHON_WARNINGS_LOGGER = logging.getLogger(&quot;py.warnings&quot;)
 
 <div class="viewcode-block" id="get_environment">
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.get_environment">[docs]</a>
+@lru_cache(maxsize=1)
 def get_environment():
     &quot;&quot;&quot;Determine the execution environment&quot;&quot;&quot;
     try:
@@ -166,39 +168,39 @@ def get_environment():
 <div class="viewcode-block" id="create_output_widget">
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.create_output_widget">[docs]</a>
 def create_output_widget(height=300):
-    return pn.Feed(
+    return pn.pane.HTML(
+        &quot;&quot;,
         height=height,
         styles={
+            &#39;overflow-y&#39;: &#39;auto&#39;,
+            &#39;overflow-x&#39;: &#39;auto&#39;,
             &#39;border&#39;: &#39;1px solid #ddd&#39;,
             &#39;width&#39;: &#39;100%&#39;,
             &#39;font-family&#39;: &#39;monospace&#39;,
             &#39;padding&#39;: &#39;8px&#39;,
             &#39;background-color&#39;: &#39;white&#39;
-        },
-        load_buffer=1_000_000, 
-        view_latest=True
+        }
     )</div>
 
 
-if get_environment() == &#39;vscode&#39;:
-    pn.extension()
-else:
-    pn.extension(comms=&#39;ipywidgets&#39;)
-
-log_outputs = {
+ENVIRONMENT = get_environment()
+LOG_OUTPUTS = {
     &quot;WARNING/ERROR&quot;: create_output_widget(),
     &quot;INFO&quot;: create_output_widget(),
     &quot;DEBUG&quot;: create_output_widget(),
     &quot;ALL&quot;: create_output_widget(),
 }
-tab_order = [&quot;ALL&quot;, &quot;WARNING/ERROR&quot;, &quot;INFO&quot;, &quot;DEBUG&quot;]
-logger_widget = pn.Tabs(
-    *[(title, log_outputs[title]) for title in tab_order],
+TAB_ORDER = [&quot;ALL&quot;, &quot;WARNING/ERROR&quot;, &quot;INFO&quot;, &quot;DEBUG&quot;]
+LOGGER_WIDGET = pn.Tabs(
+    *[(title, LOG_OUTPUTS[title]) for title in TAB_ORDER],
     height=350,
     sizing_mode=&#39;stretch_width&#39;
 )
-if get_environment() == &#39;vscode&#39;:
-    display(logger_widget)
+if ENVIRONMENT == &#39;vscode&#39;:
+    pn.extension()
+    display(LOGGER_WIDGET)
+else:
+    pn.extension(comms=&#39;ipywidgets&#39;)
 
 <div class="viewcode-block" id="LoggingConfig">
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.LoggingConfig">[docs]</a>
@@ -273,7 +275,7 @@ class AsyncEmitLogHandler(logging.Handler):
         return log_entry
 
     def _emit_to_widget(self, level, html_output):
-        &quot;&quot;&quot;Handles the widget updates using Feed component&quot;&quot;&quot;
+        &quot;&quot;&quot;Handles the widget updates.&quot;&quot;&quot;
         level_to_output = {
             logging.WARNING: &quot;WARNING/ERROR&quot;,
             logging.ERROR: &quot;WARNING/ERROR&quot;,
@@ -281,17 +283,16 @@ class AsyncEmitLogHandler(logging.Handler):
             logging.DEBUG: &quot;DEBUG&quot;
         }
 
-        html_wrapped = pn.pane.HTML(f&quot;&lt;div style=&#39;margin: 0;&#39;&gt;{html_output}&lt;/div&gt;&quot;)
+        html_wrapped = f&quot;&lt;div style=&#39;margin: 0;&#39;&gt;{html_output}&lt;/div&gt;&quot;
 
         # Update specific level output
         output_key = level_to_output.get(level)
         if output_key:
-            current_objects = self.log_outputs[output_key].objects
-            self.log_outputs[output_key].objects = current_objects + [html_wrapped]
-
+            current = self.log_outputs[output_key].object or &quot;&quot;
+            self.log_outputs[output_key].object = current + &quot;\n&quot; + html_wrapped if current else html_wrapped
         # Update ALL output
-        current_all_objects = self.log_outputs[&quot;ALL&quot;].objects
-        self.log_outputs[&quot;ALL&quot;].objects = current_all_objects + [html_wrapped]
+        current_all = self.log_outputs[&quot;ALL&quot;].object or &quot;&quot;
+        self.log_outputs[&quot;ALL&quot;].object = current_all + &quot;\n&quot; + html_wrapped if current_all else html_wrapped
 
         # Update Jupyter display if in jupyter environment
         if self.environment == &#39;jupyter&#39;:
@@ -415,16 +416,16 @@ class LogFilter:
 <div class="viewcode-block" id="logging_state">
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.logging_state">[docs]</a>
 def logging_state(log_level, tardis_config, specific_log_level=None, display_logging_widget=True):
-    if display_logging_widget and get_environment() == &#39;jupyter&#39;:
-        display_handle = display(logger_widget, display_id=&quot;logger_widget&quot;)
-    elif display_logging_widget and get_environment() == &#39;vscode&#39;:
+    if display_logging_widget and ENVIRONMENT == &#39;jupyter&#39;:
+        display_handle = display(LOGGER_WIDGET, display_id=&quot;logger_widget&quot;)
+    elif display_logging_widget and ENVIRONMENT == &#39;vscode&#39;:
         display_handle = None
     else:
         display_handle = None
-    logger = TARDISLogger(display_handle=display_handle, logger_widget=logger_widget, log_outputs=log_outputs)
+    logger = TARDISLogger(display_handle=display_handle, logger_widget=LOGGER_WIDGET, log_outputs=LOG_OUTPUTS)
     logger.configure_logging(log_level, tardis_config, specific_log_level)
     logger.setup_widget_logging(display_widget=display_logging_widget)
-    return logger_widget if (display_logging_widget and get_environment() in [&#39;jupyter&#39;, &#39;vscode&#39;]) else None</div>
+    return LOGGER_WIDGET if (display_logging_widget and ENVIRONMENT in [&#39;jupyter&#39;, &#39;vscode&#39;]) else None</div>
 
  
 </pre></div>
