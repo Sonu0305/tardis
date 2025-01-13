@@ -231,37 +231,37 @@ Extrapolate with exponential fits</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.reproject">
-<span class="sig-name descname"><span class="pre">reproject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/v_inner_solver.html#InnerVelocitySolverWorkflow.reproject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.reproject" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">reproject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array_one</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_one</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">array_two</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask_two</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/v_inner_solver.html#InnerVelocitySolverWorkflow.reproject"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.reproject" title="Link to this definition">¶</a></dt>
 <dd><p>Reprojects two sub_arrays defined by a set of masks onto an array where the masks of both objects are true</p>
 <dl class="simple">
-<dt>let A1, A2 be arrays of size gemetry.no_of_shells and</dt><dd><p>a1 = A1[m1],
-a2 = A2[m2]</p>
+<dt>let A1, A2 be arrays of size gemetry.no_of_shells and</dt><dd><p>a1 = A1[mask_one],
+a2 = A2[mask_two]</p>
 </dd>
-<dt>find a1*, a2* s.t.</dt><dd><p>a1* = A1[m1 &amp; m2],
-a2* = A2[m1 &amp; m2]</p>
+<dt>find a1*, a2* s.t.</dt><dd><p>a1* = A1[mask_one &amp; mask_two],
+a2* = A2[mask_one &amp; mask_two]</p>
 </dd>
-<dt>this is equivalent to</dt><dd><p>a1* = A1[m1][m2[m1]] = a1[m2[m1]],
-a2* = A2[m2][m1[m2]] = a2[m1[m2]]</p>
+<dt>this is equivalent to</dt><dd><p>a1* = A1[mask_one][mask_two[mask_one]] = a1[mask_two[mask_one]],
+a2* = A2[mask_two][mask_one[mask_two]] = a2[mask_one[mask_two]]</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>a1</strong><span class="classifier">np.ndarray</span></dt><dd><p>A sub array of an array with the shape of a geometry property</p>
+<dt><strong>array1</strong><span class="classifier">np.ndarray</span></dt><dd><p>A sub array of an array with the shape of a geometry property</p>
 </dd>
-<dt><strong>m1</strong><span class="classifier">np.ndarray(bool)</span></dt><dd><p>Mask such that the parrent array accessed at this mask gives a1</p>
+<dt><strong>mask_one</strong><span class="classifier">np.ndarray(bool)</span></dt><dd><p>Mask such that the parrent array accessed at this mask gives a1</p>
 </dd>
-<dt><strong>a2</strong><span class="classifier">np.ndarray</span></dt><dd><p>A sub array of an array with the shape of a geometry property</p>
+<dt><strong>array_two</strong><span class="classifier">np.ndarray</span></dt><dd><p>A sub array of an array with the shape of a geometry property</p>
 </dd>
-<dt><strong>m2</strong><span class="classifier">np.ndarray(bool)</span></dt><dd><p>Mask such that the parrent array accessed at this mask gives a2</p>
+<dt><strong>mask_two</strong><span class="classifier">np.ndarray(bool)</span></dt><dd><p>Mask such that the parrent array accessed at this mask gives a2</p>
 </dd>
 </dl>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
-<dt>a1*</dt><dd><p>reprojection of a1 onto m1 &amp; m2</p>
+<dt>array_one*</dt><dd><p>reprojection of array_one onto mask_one &amp; mask_two</p>
 </dd>
-<dt>a2*</dt><dd><p>reprojection of a2 onto m1 &amp; m2</p>
+<dt>array_two*</dt><dd><p>reprojection of array_two onto mask_one &amp; mask_two</p>
 </dd>
 </dl>
 </dd>
