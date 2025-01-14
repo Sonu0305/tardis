@@ -606,7 +606,7 @@ class Configuration(ConfigurationNameSpace, ConfigWriterMixin):
         &quot;&quot;&quot;
         convergence_parameters = [&quot;damping_constant&quot;, &quot;threshold&quot;, &quot;type&quot;]
 
-        for convergence_variable in [&quot;t_inner&quot;, &quot;t_rad&quot;, &quot;w&quot;]:
+        for convergence_variable in [&quot;t_inner&quot;, &quot;t_rad&quot;, &quot;w&quot;, &quot;v_inner_boundary&quot;]:
             if convergence_variable not in convergence_section_dict:
                 convergence_section_dict[convergence_variable] = {}
             convergence_variable_section = convergence_section_dict[

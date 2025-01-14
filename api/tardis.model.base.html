@@ -185,10 +185,10 @@ boundaries</p>
 <dt><strong>dilution_factor</strong><span class="classifier">np.ndarray</span></dt><dd><p>If None, the dilution_factor will be initialized with the geometric
 dilution factor.</p>
 </dd>
-<dt><strong>v_boundary_inner</strong><span class="classifier">astropy.units.Quantity</span></dt><dd></dd>
-<dt><strong>v_boundary_outer</strong><span class="classifier">astropy.units.Quantity</span></dt><dd></dd>
+<dt><strong>v_inner_boundary</strong><span class="classifier">astropy.units.Quantity</span></dt><dd></dd>
+<dt><strong>v_outer_boundary</strong><span class="classifier">astropy.units.Quantity</span></dt><dd></dd>
 <dt><strong>raw_velocity</strong><span class="classifier">np.ndarray</span></dt><dd><p>The complete array of the velocities, without being cut by
-<a class="reference internal" href="#tardis.model.base.SimulationState.v_boundary_inner" title="tardis.model.base.SimulationState.v_boundary_inner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_boundary_inner</span></code></a> and <a class="reference internal" href="#tardis.model.base.SimulationState.v_boundary_outer" title="tardis.model.base.SimulationState.v_boundary_outer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_boundary_outer</span></code></a></p>
+<a class="reference internal" href="#tardis.model.base.SimulationState.v_inner_boundary" title="tardis.model.base.SimulationState.v_inner_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_inner_boundary</span></code></a> and <a class="reference internal" href="#tardis.model.base.SimulationState.v_outer_boundary" title="tardis.model.base.SimulationState.v_outer_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_outer_boundary</span></code></a></p>
 </dd>
 <dt><strong>electron_densities</strong><span class="classifier">astropy.units.quantity.Quantity</span></dt><dd></dd>
 </dl>
@@ -208,8 +208,8 @@ dilution factor.</p>
 <dt><strong>v_middle</strong><span class="classifier">astropy.units.quantity.Quantity</span></dt><dd></dd>
 <dt><strong>density</strong><span class="classifier">astropy.units.quantity.Quantity</span></dt><dd></dd>
 <dt><strong>volume</strong><span class="classifier">astropy.units.quantity.Quantity</span></dt><dd></dd>
-<dt><strong>no_of_shells</strong><span class="classifier">int</span></dt><dd><p>The number of shells as formed by <a class="reference internal" href="#tardis.model.base.SimulationState.v_boundary_inner" title="tardis.model.base.SimulationState.v_boundary_inner"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_boundary_inner</span></code></a> and
-<a class="reference internal" href="#tardis.model.base.SimulationState.v_boundary_outer" title="tardis.model.base.SimulationState.v_boundary_outer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_boundary_outer</span></code></a></p>
+<dt><strong>no_of_shells</strong><span class="classifier">int</span></dt><dd><p>The number of shells as formed by <a class="reference internal" href="#tardis.model.base.SimulationState.v_inner_boundary" title="tardis.model.base.SimulationState.v_inner_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_inner_boundary</span></code></a> and
+<a class="reference internal" href="#tardis.model.base.SimulationState.v_outer_boundary" title="tardis.model.base.SimulationState.v_outer_boundary"><code class="xref py py-obj docutils literal notranslate"><span class="pre">v_outer_boundary</span></code></a></p>
 </dd>
 <dt><strong>no_of_raw_shells</strong><span class="classifier">int</span></dt><dd></dd>
 </dl>
@@ -334,18 +334,13 @@ dilution factor.</p>
 <dd></dd></dl>
 
 <dl class="py property">
-<dt class="sig sig-object py" id="tardis.model.base.SimulationState.v_boundary_inner">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_boundary_inner</span></span><a class="headerlink" href="#tardis.model.base.SimulationState.v_boundary_inner" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="tardis.model.base.SimulationState.v_boundary_outer">
-<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_boundary_outer</span></span><a class="headerlink" href="#tardis.model.base.SimulationState.v_boundary_outer" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py property">
 <dt class="sig sig-object py" id="tardis.model.base.SimulationState.v_inner">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_inner</span></span><a class="headerlink" href="#tardis.model.base.SimulationState.v_inner" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="tardis.model.base.SimulationState.v_inner_boundary">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_inner_boundary</span></span><a class="headerlink" href="#tardis.model.base.SimulationState.v_inner_boundary" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -356,6 +351,11 @@ dilution factor.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="tardis.model.base.SimulationState.v_outer">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_outer</span></span><a class="headerlink" href="#tardis.model.base.SimulationState.v_outer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="tardis.model.base.SimulationState.v_outer_boundary">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_outer_boundary</span></span><a class="headerlink" href="#tardis.model.base.SimulationState.v_outer_boundary" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
