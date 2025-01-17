@@ -3,7 +3,7 @@ const appCacheName = 'tardis-latest';
 
 const preCacheFiles = [];
 
-const cachePatterns = ['https://cdn.holoviz.org/panel/1.5.4/dist/', 'https://cdn.bokeh.org/bokeh/', 'https://cdn.jsdelivr.net/pyodide/', 'https://files.pythonhosted.org/packages/', 'https://pypi.org/pypi/'];
+const cachePatterns = ['https://cdn.holoviz.org/panel/1.5.5/dist/', 'https://cdn.bokeh.org/bokeh/', 'https://cdn.jsdelivr.net/pyodide/', 'https://files.pythonhosted.org/packages/', 'https://pypi.org/pypi/'];
 
 self.addEventListener('install', (e) => {
   console.log('[Service Worker] Install');
