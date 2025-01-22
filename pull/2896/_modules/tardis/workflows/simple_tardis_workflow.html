@@ -405,7 +405,9 @@ class SimpleTARDISWorkflow(WorkflowLogging):
         self.simulation_state.dilution_factor = next_values[&quot;dilution_factor&quot;]
         self.simulation_state.blackbody_packet_source.temperature = next_values[
             &quot;t_inner&quot;
-        ]</div>
+        ]
+
+        return next_values</div>
 
 
 <div class="viewcode-block" id="SimpleTARDISWorkflow.solve_plasma">
@@ -655,7 +657,7 @@ class SimpleTARDISWorkflow(WorkflowLogging):
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 15 Jan 2025.
+      <span class="lastupdated">Last updated on 22 Jan 2025.
       </span></p>
   </div>
 
