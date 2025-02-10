@@ -160,8 +160,8 @@
   <section id="module-tardis.grid.base">
 <span id="tardis-grid-base-module"></span><h1>tardis.grid.base module<a class="headerlink" href="#module-tardis.grid.base" title="Link to this heading">¶</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="tardis.grid.base.tardisGrid">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tardis.grid.base.</span></span><span class="sig-name descname"><span class="pre">tardisGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gridFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/grid/base.html#tardisGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.grid.base.tardisGrid" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="tardis.grid.base.TardisGrid">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tardis.grid.base.</span></span><span class="sig-name descname"><span class="pre">TardisGrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gridFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/grid/base.html#TardisGrid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.grid.base.TardisGrid" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>A class that stores a grid of TARDIS parameters and
 facilitates running large numbers of simulations
@@ -189,8 +189,8 @@ a TARDIS simulation.</p>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="tardis.grid.base.tardisGrid.from_axes">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_axes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axesdict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/grid/base.html#tardisGrid.from_axes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.grid.base.tardisGrid.from_axes" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="tardis.grid.base.TardisGrid.from_axes">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_axes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configFile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axesdict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/grid/base.html#TardisGrid.from_axes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.grid.base.TardisGrid.from_axes" title="Link to this definition">¶</a></dt>
 <dd><p>Creates a grid from a set of axes. The axes are provided
 as a dictionary, where each key is a valid tardis config
 key, and the value is an iterable of values.</p>
@@ -209,8 +209,8 @@ parameters.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="tardis.grid.base.tardisGrid.grid_row_to_config">
-<span class="sig-name descname"><span class="pre">grid_row_to_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/grid/base.html#tardisGrid.grid_row_to_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.grid.base.tardisGrid.grid_row_to_config" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="tardis.grid.base.TardisGrid.grid_row_to_config">
+<span class="sig-name descname"><span class="pre">grid_row_to_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row_index</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/grid/base.html#TardisGrid.grid_row_to_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.grid.base.TardisGrid.grid_row_to_config" title="Link to this definition">¶</a></dt>
 <dd><p>Converts a grid row to a TARDIS config dict.
 Modifies the base self.config according to the
 row in self.grid accessed at the provided row_index.
@@ -234,8 +234,8 @@ properties according to the selected row in the grid.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="tardis.grid.base.tardisGrid.grid_row_to_simulation_state">
-<span class="sig-name descname"><span class="pre">grid_row_to_simulation_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atomic_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/grid/base.html#tardisGrid.grid_row_to_simulation_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.grid.base.tardisGrid.grid_row_to_simulation_state" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="tardis.grid.base.TardisGrid.grid_row_to_simulation_state">
+<span class="sig-name descname"><span class="pre">grid_row_to_simulation_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atomic_data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/grid/base.html#TardisGrid.grid_row_to_simulation_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.grid.base.TardisGrid.grid_row_to_simulation_state" title="Link to this definition">¶</a></dt>
 <dd><p>Generates a TARDIS SimulationState object using the base
 self.config modified by the specified grid row.</p>
 <dl class="field-list simple">
@@ -254,8 +254,8 @@ self.config modified by the specified grid row.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="tardis.grid.base.tardisGrid.run_sim_from_grid">
-<span class="sig-name descname"><span class="pre">run_sim_from_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row_index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">tardiskwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/grid/base.html#tardisGrid.run_sim_from_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.grid.base.tardisGrid.run_sim_from_grid" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="tardis.grid.base.TardisGrid.run_sim_from_grid">
+<span class="sig-name descname"><span class="pre">run_sim_from_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row_index</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">tardiskwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/grid/base.html#TardisGrid.run_sim_from_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.grid.base.TardisGrid.run_sim_from_grid" title="Link to this definition">¶</a></dt>
 <dd><p>Runs a full TARDIS simulation using the base self.config
 modified by the user specified row_index.</p>
 <dl class="field-list simple">
@@ -275,8 +275,8 @@ modified by the user specified row_index.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="tardis.grid.base.tardisGrid.save_grid">
-<span class="sig-name descname"><span class="pre">save_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/grid/base.html#tardisGrid.save_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.grid.base.tardisGrid.save_grid" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="tardis.grid.base.TardisGrid.save_grid">
+<span class="sig-name descname"><span class="pre">save_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/grid/base.html#TardisGrid.save_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.grid.base.TardisGrid.save_grid" title="Link to this definition">¶</a></dt>
 <dd><p>Saves the parameter grid. Does not save the base
 self.config in any way.</p>
 <dl class="field-list simple">
@@ -305,7 +305,7 @@ self.config in any way.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 05 Feb 2025.
+      <span class="lastupdated">Last updated on 10 Feb 2025.
       </span></p>
   </div>
 
