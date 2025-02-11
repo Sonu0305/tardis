@@ -222,7 +222,7 @@ find the energy of the scattered photon we use the equation we multiply the init
 <h2>Code example<a class="headerlink" href="#Code-example" title="Link to this heading">¶</a></h2>
 <p>Each source of opacity has its own function. The following cells demonstrate how each function works and how the opacities are implemented in the code.</p>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -234,7 +234,7 @@ find the energy of the scattered photon we use the equation we multiply the init
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating an array of packet energies from 100 KeV to 10000 KeV</span>
@@ -243,11 +243,11 @@ find the energy of the scattered photon we use the equation we multiply the init
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The pair creation opacity function takes the packet energy, the ejecta density and the fraction of iron group elements</span>
-<span class="n">ejecta_density</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ejecta_density</span> <span class="o">=</span> <span class="mf">1e-10</span>
 <span class="n">x_ige</span> <span class="o">=</span> <span class="mf">0.05</span>
 
 <span class="c1"># The pair creation function takes in one packet at a time, so we loop through the energy array to find the opacities at a given density and iron group fraction</span>
@@ -258,13 +258,14 @@ find the energy of the scattered photon we use the equation we multiply the init
 <span class="c1"># We can then plot the opacity</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">pair_creation_opacities</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Packet Energy (KeV)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Opacity (cm^-1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Opacity (cm$^</span><span class="si">{</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">$)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">right</span><span class="o">=</span> <span class="mi">5000</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Pair Production Opacity&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -280,23 +281,23 @@ Text(0.5, 1.0, &#39;Pair Production Opacity&#39;)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The compton opacity function takes the packet energy and the electron density</span>
-<span class="n">electron_density</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">electron_density</span> <span class="o">=</span> <span class="mf">3e13</span>
 
 <span class="n">compton_opacities</span> <span class="o">=</span> <span class="n">compton_opacity_calculation</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">electron_density</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">compton_opacities</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Packet energies (KeV)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Opacity (cm^-1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Opacity (cm$^</span><span class="si">{</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">$)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Compton Scattering Opacity&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -312,7 +313,7 @@ Text(0.5, 1.0, &#39;Compton Scattering Opacity&#39;)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The photoabsorption opacity function takes in the packet energy, ejecta density and the fraction of iron group elements</span>
@@ -320,14 +321,14 @@ Text(0.5, 1.0, &#39;Compton Scattering Opacity&#39;)
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">photoabsorption_opacities</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Packet energies (KeV)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Opacity (cm^-1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Opacity (cm$^</span><span class="si">{</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">$)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Photoabsorption Opacity&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -344,7 +345,7 @@ Text(0.5, 1.0, &#39;Compton Scattering Opacity&#39;)
 </div>
 <p>The different forms of opacity are dominant at different energies which is evident when the opacities are plotted together.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">total_opacity</span> <span class="o">=</span> <span class="n">pair_creation_opacities</span> <span class="o">+</span> <span class="n">compton_opacities</span> <span class="o">+</span> <span class="n">photoabsorption_opacities</span>
@@ -354,7 +355,7 @@ Text(0.5, 1.0, &#39;Compton Scattering Opacity&#39;)
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">photoabsorption_opacities</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span> <span class="s2">&quot;Photoabsorption&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">total_opacity</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;Total&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Packet energies (KeV)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Opacity (cm^-1)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Opacity (cm$^</span><span class="si">{</span><span class="o">-</span><span class="mi">1</span><span class="si">}</span><span class="s2">$)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sources of Opacity at Different Energies&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
@@ -364,12 +365,12 @@ Text(0.5, 1.0, &#39;Compton Scattering Opacity&#39;)
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x7f44aa81a0c0&gt;
+&lt;matplotlib.legend.Legend at 0x7fdafeba6f90&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -380,7 +381,7 @@ Text(0.5, 1.0, &#39;Compton Scattering Opacity&#39;)
 </div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">frac_pair_creation</span> <span class="o">=</span> <span class="n">pair_creation_opacities</span> <span class="o">/</span> <span class="n">total_opacity</span>
@@ -399,7 +400,7 @@ Text(0.5, 1.0, &#39;Compton Scattering Opacity&#39;)
 </div>
 </div>
 <div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -412,14 +413,6 @@ Text(0, 0.5, &#39;Fraction of Total Opacity&#39;)
 </div>
 <div class="output_area docutils container">
 <img alt="../../_images/physics_tardisgamma_opacities_12_1.png" src="../../_images/physics_tardisgamma_opacities_12_1.png" />
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
-</pre></div>
 </div>
 </div>
 </section>
@@ -437,7 +430,7 @@ Text(0, 0.5, &#39;Fraction of Total Opacity&#39;)
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 27 Jan 2025.
+      <span class="lastupdated">Last updated on 11 Feb 2025.
       </span></p>
   </div>
 
