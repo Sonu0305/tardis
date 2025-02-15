@@ -228,7 +228,7 @@ def read_artis_density(fname, legacy_return=True):
     )
 
     velocity = u.Quantity(artis_model[&quot;velocities&quot;], &quot;km/s&quot;).to(&quot;cm/s&quot;)
-    mean_density = u.Quantity(10 ** artis_model[&quot;mean_densities_0&quot;], &quot;g/cm^3&quot;)[1:]
+    mean_density = u.Quantity(10 ** artis_model[&quot;mean_densities_0&quot;], &quot;g/cm^3&quot;)
 
     isotope_mass_fractions = pd.DataFrame(
         artis_model[
