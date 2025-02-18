@@ -165,9 +165,9 @@ def _set_tardis_config_property(tardis_config, key, value):
     setattr(tmp_dict, keyitems[-1], value)
 
 
-<div class="viewcode-block" id="tardisGrid">
-<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.tardisGrid">[docs]</a>
-class tardisGrid:
+<div class="viewcode-block" id="TardisGrid">
+<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.TardisGrid">[docs]</a>
+class TardisGrid:
     &quot;&quot;&quot;
     A class that stores a grid of TARDIS parameters and
     facilitates running large numbers of simulations
@@ -201,8 +201,8 @@ class tardisGrid:
         self.config = tardis_config
         self.grid = gridFrame
 
-<div class="viewcode-block" id="tardisGrid.grid_row_to_config">
-<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.tardisGrid.grid_row_to_config">[docs]</a>
+<div class="viewcode-block" id="TardisGrid.grid_row_to_config">
+<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.TardisGrid.grid_row_to_config">[docs]</a>
     def grid_row_to_config(self, row_index):
         &quot;&quot;&quot;
         Converts a grid row to a TARDIS config dict.
@@ -229,8 +229,8 @@ class tardisGrid:
         return tmp_config</div>
 
 
-<div class="viewcode-block" id="tardisGrid.grid_row_to_simulation_state">
-<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.tardisGrid.grid_row_to_simulation_state">[docs]</a>
+<div class="viewcode-block" id="TardisGrid.grid_row_to_simulation_state">
+<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.TardisGrid.grid_row_to_simulation_state">[docs]</a>
     def grid_row_to_simulation_state(self, row_index, atomic_data):
         &quot;&quot;&quot;
         Generates a TARDIS SimulationState object using the base
@@ -252,8 +252,8 @@ class tardisGrid:
         return simulation_state</div>
 
 
-<div class="viewcode-block" id="tardisGrid.run_sim_from_grid">
-<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.tardisGrid.run_sim_from_grid">[docs]</a>
+<div class="viewcode-block" id="TardisGrid.run_sim_from_grid">
+<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.TardisGrid.run_sim_from_grid">[docs]</a>
     def run_sim_from_grid(self, row_index, **tardiskwargs):
         &quot;&quot;&quot;
         Runs a full TARDIS simulation using the base self.config
@@ -274,8 +274,8 @@ class tardisGrid:
         return sim</div>
 
 
-<div class="viewcode-block" id="tardisGrid.save_grid">
-<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.tardisGrid.save_grid">[docs]</a>
+<div class="viewcode-block" id="TardisGrid.save_grid">
+<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.TardisGrid.save_grid">[docs]</a>
     def save_grid(self, filename):
         &quot;&quot;&quot;
         Saves the parameter grid. Does not save the base
@@ -289,8 +289,8 @@ class tardisGrid:
         self.grid.to_csv(filename, index=False)</div>
 
 
-<div class="viewcode-block" id="tardisGrid.from_axes">
-<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.tardisGrid.from_axes">[docs]</a>
+<div class="viewcode-block" id="TardisGrid.from_axes">
+<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.TardisGrid.from_axes">[docs]</a>
     @classmethod
     def from_axes(cls, configFile, axesdict):
         &quot;&quot;&quot;
@@ -330,7 +330,7 @@ class tardisGrid:
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 12 Feb 2025.
+      <span class="lastupdated">Last updated on 18 Feb 2025.
       </span></p>
   </div>
 
