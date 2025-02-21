@@ -497,7 +497,7 @@ class BlackBodySimpleSourceRelativistic(BlackBodySimpleSource, HDFWriterMixin):
 
 <div class="viewcode-block" id="BlackBodySimpleSourceRelativistic.create_packets">
 <a class="viewcode-back" href="../../../../api/tardis.transport.montecarlo.packet_source.html#tardis.transport.montecarlo.packet_source.BlackBodySimpleSourceRelativistic.create_packets">[docs]</a>
-    def create_packets(self, no_of_packets):
+    def create_packets(self, no_of_packets, *args, **kwargs):
         &quot;&quot;&quot;Generate relativistic black-body packet properties as arrays
 
         Parameters
@@ -519,7 +519,7 @@ class BlackBodySimpleSourceRelativistic(BlackBodySimpleSource, HDFWriterMixin):
         if self.radius is None or self.time_explosion is None:
             raise ValueError(&quot;Black body Radius or Time of Explosion isn&#39;t set&quot;)
         self.beta = (self.radius / self.time_explosion) / const.c
-        return super().create_packets(no_of_packets)</div>
+        return super().create_packets(no_of_packets, *args, **kwargs)</div>
 
 
 <div class="viewcode-block" id="BlackBodySimpleSourceRelativistic.create_packet_mus">
