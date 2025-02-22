@@ -133,6 +133,7 @@ import numpy as np
 import pandas as pd
 from astropy import units as u
 
+
 <div class="viewcode-block" id="ArtisModelData">
 <a class="viewcode-back" href="../../../../../api/tardis.io.model.readers.artis.html#tardis.io.model.readers.artis.ArtisModelData">[docs]</a>
 @dataclass
@@ -209,7 +210,7 @@ def read_artis_density(fname, legacy_return=True):
                 break
 
     artis_model_columns = [
-        &quot;cell_id&quot;,
+        &quot;cell_index&quot;,
         &quot;velocities&quot;,
         &quot;mean_densities_0&quot;,
         &quot;ni56_mass_fraction&quot;,
@@ -226,7 +227,9 @@ def read_artis_density(fname, legacy_return=True):
         names=artis_model_columns,
         sep=r&quot;\s+&quot;,
     )
-
+    assert (
+        len(artis_model) == no_of_shells
+    ), &quot;Number of shells {len(artis_model)} does not match metadate {no_of_shells}&quot;
     velocity = u.Quantity(artis_model[&quot;velocities&quot;], &quot;km/s&quot;).to(&quot;cm/s&quot;)
     mean_density = u.Quantity(10 ** artis_model[&quot;mean_densities_0&quot;], &quot;g/cm^3&quot;)
 
@@ -242,11 +245,11 @@ def read_artis_density(fname, legacy_return=True):
     )
     isotope_mass_fractions.index = pd.MultiIndex.from_tuples(
         [(28, 56), (27, 56), (26, 52), (24, 48)],
-        names=[&quot;Z&quot;, &quot;A&quot;],
+        names=[&quot;atomic_number&quot;, &quot;mass_number&quot;],
     )
 
-    isotope_mass_fractions.columns = artis_model[&quot;cell_id&quot;]
-    isotope_mass_fractions.columns.name = &quot;cell_id&quot;
+    isotope_mass_fractions.columns = artis_model[&quot;cell_index&quot;]
+    isotope_mass_fractions.columns.name = &quot;cell_index&quot;
 
     if legacy_return:
         return time_of_model, velocity, mean_density
@@ -281,13 +284,12 @@ def read_artis_mass_fractions(fname, normalize=True):
     )
 
     mass_fractions_df.index.name = &quot;cell_index&quot;
-    mass_fractions_df.columns.Z = &quot;element&quot;
 
     if normalize:
         mass_fractions_df = mass_fractions_df.div(mass_fractions_df.sum(axis=1), axis=0)
     mass_fractions_df = mass_fractions_df.T
-    mass_fractions_df.index.name = &quot;Z&quot;
-    mass_fractions_df.columns.name = &quot;cell_id&quot;
+    mass_fractions_df.index.name = &quot;atomic_number&quot;
+    mass_fractions_df.columns.name = &quot;cell_index&quot;
 
     return mass_fractions_df</div>
 
@@ -316,10 +318,13 @@ def read_artis_model(density_fname, abundance_fname):
     )
     mass_fractions = read_artis_mass_fractions(abundance_fname)
     mass_fractions.index = pd.MultiIndex.from_arrays(
-        [mass_fractions.index, [-1] * len(mass_fractions.index)], names=[&quot;Z&quot;, &quot;A&quot;]
+        [mass_fractions.index, [-1] * len(mass_fractions.index)],
+        names=[&quot;atomic_number&quot;, &quot;mass_number&quot;],
     )
-    isotope_summed = isotope_mass_fractions.groupby(level=&quot;Z&quot;).sum()
-    mass_fractions = mass_fractions.sub(isotope_summed, level=&quot;Z&quot;, fill_value=0)
+    isotope_summed = isotope_mass_fractions.groupby(level=&quot;atomic_number&quot;).sum()
+    mass_fractions = mass_fractions.sub(
+        isotope_summed, level=&quot;atomic_number&quot;, fill_value=0
+    )
 
     mass_fractions = pd.concat([mass_fractions, isotope_mass_fractions], axis=0)
 
@@ -330,6 +335,8 @@ def read_artis_model(density_fname, abundance_fname):
         mean_density=mean_density,
         mass_fractions=mass_fractions,
     )</div>
+
+
 
 from tardis.model.geometry.radial1d import HomologousRadial1DGeometry
 </pre></div>
@@ -342,7 +349,7 @@ from tardis.model.geometry.radial1d import HomologousRadial1DGeometry
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 15 Feb 2025.
+      <span class="lastupdated">Last updated on 22 Feb 2025.
       </span></p>
   </div>
 
