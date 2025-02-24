@@ -74,8 +74,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../io/configuration/index.html">Configuration (Required Input)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../io/model/index.html">Reading Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../io/optional/index.html">Optional Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../io/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../io/output/index.html">Additional Outputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Analysing Tardis Outputs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../analysing_tardis_outputs/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Physics Walkthrough</span></p>
 <ul>
@@ -599,7 +602,7 @@ class SimpleTARDISWorkflow(WorkflowLogging):
 <a class="viewcode-back" href="../../../api/tardis.workflows.simple_tardis_workflow.html#tardis.workflows.simple_tardis_workflow.SimpleTARDISWorkflow.run">[docs]</a>
     def run(self):
         &quot;&quot;&quot;Run the TARDIS simulation until convergence is reached&quot;&quot;&quot;
-        converged = False
+        self.converged = False
         while self.completed_iterations &lt; self.total_iterations - 1:
             logger.info(
                 f&quot;\n\tStarting iteration {(self.completed_iterations + 1):d} of {self.total_iterations:d}&quot;
@@ -620,13 +623,13 @@ class SimpleTARDISWorkflow(WorkflowLogging):
 
             self.solve_plasma(estimated_radfield_properties)
 
-            converged = self.check_convergence(estimated_values)
+            self.converged = self.check_convergence(estimated_values)
             self.completed_iterations += 1
 
-            if converged and self.convergence_strategy.stop_if_converged:
+            if self.converged and self.convergence_strategy.stop_if_converged:
                 break
 
-        if converged:
+        if self.converged:
             logger.info(&quot;\n\tStarting final iteration&quot;)
         else:
             logger.error(
@@ -655,7 +658,7 @@ class SimpleTARDISWorkflow(WorkflowLogging):
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 27 Jan 2025.
+      <span class="lastupdated">Last updated on 24 Feb 2025.
       </span></p>
   </div>
 
