@@ -162,6 +162,52 @@
              
   <section id="module-tardis.energy_input.samplers">
 <span id="tardis-energy-input-samplers-module"></span><h1>tardis.energy_input.samplers module<a class="headerlink" href="#module-tardis.energy_input.samplers" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="tardis.energy_input.samplers.PositroniumSampler">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tardis.energy_input.samplers.</span></span><span class="sig-name descname"><span class="pre">PositroniumSampler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/energy_input/samplers.html#PositroniumSampler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.energy_input.samplers.PositroniumSampler" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>n_grid</strong><span class="classifier">int, optional</span></dt><dd><p>Number of grid points for the CDF, by default 1000</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="tardis.energy_input.samplers.PositroniumSampler.pdf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/energy_input/samplers.html#PositroniumSampler.pdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.energy_input.samplers.PositroniumSampler.pdf" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>x</strong><span class="classifier">float</span></dt><dd><p>E / m_e c^2</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>float</dt><dd><p>PDF of positronium energy from Ore amnd Powell (1949)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tardis.energy_input.samplers.PositroniumSampler.sample_energy">
+<span class="sig-name descname"><span class="pre">sample_energy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/energy_input/samplers.html#PositroniumSampler.sample_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.energy_input.samplers.PositroniumSampler.sample_energy" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>float</dt><dd><p>Sampled positronium energy</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="tardis.energy_input.samplers.create_energy_cdf">
 <span class="sig-prename descclassname"><span class="pre">tardis.energy_input.samplers.</span></span><span class="sig-name descname"><span class="pre">create_energy_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intensity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/energy_input/samplers.html#create_energy_cdf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.energy_input.samplers.create_energy_cdf" title="Link to this definition">¶</a></dt>
@@ -294,7 +340,7 @@ of the isotopes (needs restructuring for more isotopes)</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 24 Feb 2025.
+      <span class="lastupdated">Last updated on 26 Feb 2025.
       </span></p>
   </div>
 
