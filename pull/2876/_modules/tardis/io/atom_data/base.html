@@ -596,8 +596,11 @@ class AtomData:
                 self.selected_atomic_numbers, level=&quot;atomic_number&quot;
             )
         ]
-
-        self.lines = self.lines.sort_values(by=&quot;wavelength&quot;)</div>
+        # see https://github.com/numpy/numpy/issues/27725#issuecomment-2465471648
+        # with kind=&quot;stable&quot; the returned array will maintain the relative order of a values which compare as equal.
+        # this is important especially after numpy v2 release
+        # https://numpy.org/doc/stable/release/2.0.0-notes.html#minor-changes-in-behavior-of-sorting-functions
+        self.lines = self.lines.sort_values(by=[&quot;wavelength&quot;, &quot;line_id&quot;], kind=&quot;stable&quot;)</div>
 
 
 <div class="viewcode-block" id="AtomData.prepare_line_level_indexes">
@@ -905,7 +908,7 @@ class MoleculeData:
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 18 Feb 2025.
+      <span class="lastupdated">Last updated on 27 Feb 2025.
       </span></p>
   </div>
 
