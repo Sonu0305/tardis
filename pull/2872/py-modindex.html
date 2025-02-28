@@ -33,10 +33,10 @@
         <script src="_static/run_cell.js?v=da6c9fe8"></script>
         <script src="_static/WorkerHandler.js"></script>
         <script src="_static/ServiceHandler.js"></script>
-        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.2.min.js"></script>
-        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.6.2.min.js"></script>
-        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.6.2.min.js"></script>
-        <script src="https://cdn.holoviz.org/panel/1.5.5/dist/panel.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.3.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.6.3.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.6.3.min.js"></script>
+        <script src="https://cdn.holoviz.org/panel/1.6.1/dist/panel.min.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script src="_static/js/theme.js"></script>
@@ -85,8 +85,11 @@
 <li class="toctree-l1"><a class="reference internal" href="io/configuration/index.html">Configuration (Required Input)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io/model/index.html">Reading Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io/optional/index.html">Optional Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="io/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io/output/index.html">Additional Outputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Analysing Tardis Outputs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="analysing_tardis_outputs/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Physics Walkthrough</span></p>
 <ul>
@@ -361,12 +364,27 @@
      <tr class="cg-3">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="api/tardis.io.model.parse_packet_source_configuration.html#module-tardis.io.model.parse_packet_source_configuration"><code class="xref">tardis.io.model.parse_packet_source_configuration</code></a></td><td>
+       <a href="api/tardis.io.model.parse_composition_configuration.html#module-tardis.io.model.parse_composition_configuration"><code class="xref">tardis.io.model.parse_composition_configuration</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-3">
        <td></td>
        <td>&#160;&#160;&#160;
-       <a href="api/tardis.io.model.parse_radiation_field_configuration.html#module-tardis.io.model.parse_radiation_field_configuration"><code class="xref">tardis.io.model.parse_radiation_field_configuration</code></a></td><td>
+       <a href="api/tardis.io.model.parse_density_configuration.html#module-tardis.io.model.parse_density_configuration"><code class="xref">tardis.io.model.parse_density_configuration</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-3">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="api/tardis.io.model.parse_geometry_configuration.html#module-tardis.io.model.parse_geometry_configuration"><code class="xref">tardis.io.model.parse_geometry_configuration</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-3">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="api/tardis.io.model.parse_mass_fraction_configuration.html#module-tardis.io.model.parse_mass_fraction_configuration"><code class="xref">tardis.io.model.parse_mass_fraction_configuration</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-3">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="api/tardis.io.model.parse_packet_source_configuration.html#module-tardis.io.model.parse_packet_source_configuration"><code class="xref">tardis.io.model.parse_packet_source_configuration</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-3">
        <td></td>
@@ -623,7 +641,27 @@
      <tr class="cg-6">
        <td></td>
        <td>&#160;&#160;&#160;
+       <a href="api/tardis.plasma.equilibrium.rates.collisional_ionization_rates.html#module-tardis.plasma.equilibrium.rates.collisional_ionization_rates"><code class="xref">tardis.plasma.equilibrium.rates.collisional_ionization_rates</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-6">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="api/tardis.plasma.equilibrium.rates.collisional_ionization_strengths.html#module-tardis.plasma.equilibrium.rates.collisional_ionization_strengths"><code class="xref">tardis.plasma.equilibrium.rates.collisional_ionization_strengths</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-6">
+       <td></td>
+       <td>&#160;&#160;&#160;
        <a href="api/tardis.plasma.equilibrium.rates.collisional_rates.html#module-tardis.plasma.equilibrium.rates.collisional_rates"><code class="xref">tardis.plasma.equilibrium.rates.collisional_rates</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-6">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="api/tardis.plasma.equilibrium.rates.photoionization_rates.html#module-tardis.plasma.equilibrium.rates.photoionization_rates"><code class="xref">tardis.plasma.equilibrium.rates.photoionization_rates</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-6">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="api/tardis.plasma.equilibrium.rates.photoionization_strengths.html#module-tardis.plasma.equilibrium.rates.photoionization_strengths"><code class="xref">tardis.plasma.equilibrium.rates.photoionization_strengths</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-6">
        <td></td>
@@ -840,6 +878,11 @@
               id="toggle-11" style="display: none" alt="-" /></td>
        <td>
        <a href="api/tardis.transport.html#module-tardis.transport"><code class="xref">tardis.transport</code></a></td><td>
+       <em></em></td></tr>
+     <tr class="cg-11">
+       <td></td>
+       <td>&#160;&#160;&#160;
+       <a href="api/tardis.transport.frame_transformations.html#module-tardis.transport.frame_transformations"><code class="xref">tardis.transport.frame_transformations</code></a></td><td>
        <em></em></td></tr>
      <tr class="cg-11">
        <td></td>
@@ -1119,7 +1162,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 20 Jan 2025.
+      <span class="lastupdated">Last updated on 28 Feb 2025.
       </span></p>
   </div>
 

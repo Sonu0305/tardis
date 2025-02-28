@@ -33,10 +33,10 @@
         <script src="../../../_static/run_cell.js?v=da6c9fe8"></script>
         <script src="../../../_static/WorkerHandler.js"></script>
         <script src="../../../_static/ServiceHandler.js"></script>
-        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.2.min.js"></script>
-        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.6.2.min.js"></script>
-        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.6.2.min.js"></script>
-        <script src="https://cdn.holoviz.org/panel/1.5.5/dist/panel.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.6.3.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.6.3.min.js"></script>
+        <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.6.3.min.js"></script>
+        <script src="https://cdn.holoviz.org/panel/1.6.1/dist/panel.min.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
     <script src="../../../_static/js/theme.js"></script>
@@ -82,8 +82,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../io/configuration/index.html">Configuration (Required Input)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../io/model/index.html">Reading Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../io/optional/index.html">Optional Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../io/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../io/output/index.html">Additional Outputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Analysing Tardis Outputs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../analysing_tardis_outputs/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Physics Walkthrough</span></p>
 <ul>
@@ -169,9 +172,9 @@ def _set_tardis_config_property(tardis_config, key, value):
     setattr(tmp_dict, keyitems[-1], value)
 
 
-<div class="viewcode-block" id="tardisGrid">
-<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.tardisGrid">[docs]</a>
-class tardisGrid:
+<div class="viewcode-block" id="TardisGrid">
+<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.TardisGrid">[docs]</a>
+class TardisGrid:
     &quot;&quot;&quot;
     A class that stores a grid of TARDIS parameters and
     facilitates running large numbers of simulations
@@ -205,8 +208,8 @@ class tardisGrid:
         self.config = tardis_config
         self.grid = gridFrame
 
-<div class="viewcode-block" id="tardisGrid.grid_row_to_config">
-<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.tardisGrid.grid_row_to_config">[docs]</a>
+<div class="viewcode-block" id="TardisGrid.grid_row_to_config">
+<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.TardisGrid.grid_row_to_config">[docs]</a>
     def grid_row_to_config(self, row_index):
         &quot;&quot;&quot;
         Converts a grid row to a TARDIS config dict.
@@ -233,8 +236,8 @@ class tardisGrid:
         return tmp_config</div>
 
 
-<div class="viewcode-block" id="tardisGrid.grid_row_to_simulation_state">
-<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.tardisGrid.grid_row_to_simulation_state">[docs]</a>
+<div class="viewcode-block" id="TardisGrid.grid_row_to_simulation_state">
+<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.TardisGrid.grid_row_to_simulation_state">[docs]</a>
     def grid_row_to_simulation_state(self, row_index, atomic_data):
         &quot;&quot;&quot;
         Generates a TARDIS SimulationState object using the base
@@ -256,8 +259,8 @@ class tardisGrid:
         return simulation_state</div>
 
 
-<div class="viewcode-block" id="tardisGrid.run_sim_from_grid">
-<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.tardisGrid.run_sim_from_grid">[docs]</a>
+<div class="viewcode-block" id="TardisGrid.run_sim_from_grid">
+<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.TardisGrid.run_sim_from_grid">[docs]</a>
     def run_sim_from_grid(self, row_index, **tardiskwargs):
         &quot;&quot;&quot;
         Runs a full TARDIS simulation using the base self.config
@@ -278,8 +281,8 @@ class tardisGrid:
         return sim</div>
 
 
-<div class="viewcode-block" id="tardisGrid.save_grid">
-<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.tardisGrid.save_grid">[docs]</a>
+<div class="viewcode-block" id="TardisGrid.save_grid">
+<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.TardisGrid.save_grid">[docs]</a>
     def save_grid(self, filename):
         &quot;&quot;&quot;
         Saves the parameter grid. Does not save the base
@@ -293,8 +296,8 @@ class tardisGrid:
         self.grid.to_csv(filename, index=False)</div>
 
 
-<div class="viewcode-block" id="tardisGrid.from_axes">
-<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.tardisGrid.from_axes">[docs]</a>
+<div class="viewcode-block" id="TardisGrid.from_axes">
+<a class="viewcode-back" href="../../../api/tardis.grid.base.html#tardis.grid.base.TardisGrid.from_axes">[docs]</a>
     @classmethod
     def from_axes(cls, configFile, axesdict):
         &quot;&quot;&quot;
@@ -334,7 +337,7 @@ class tardisGrid:
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 20 Jan 2025.
+      <span class="lastupdated">Last updated on 28 Feb 2025.
       </span></p>
   </div>
 
