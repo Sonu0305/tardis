@@ -291,6 +291,10 @@ bridge has failed.</p>
 <section id="the-regression-data-comparison-workflow">
 <h3>The Regression Data Comparison Workflow<a class="headerlink" href="#the-regression-data-comparison-workflow" title="Link to this heading">¶</a></h3>
 <p>The Regression Data Comparison workflow compares the regression data between the current branch and the base branch on pull requests. It only runs on pull requests and not on the master branch. The workflow generates regression data for the latest commit on the pull request and compares it with the master branch using the comparison notebook. The notebook is then uploaded as an artifact and pushed to reg-data-comp repository for previews in the bot comment.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The workflow exports images from the comparison notebook and embeds them in the bot comment. Unless there are any key changes to any of the HDF files in the regression data the bot will only show two images, one containing the spectrum change and another containing relative changes in the keys. If there are any key changes, the bot will show three images, the additional one visualizing the key changes.</p>
+</div>
 </section>
 <section id="the-lfs-cache-workflow">
 <h3>The <code class="xref py py-obj docutils literal notranslate"><span class="pre">LFS-cache</span></code> workflow<a class="headerlink" href="#the-lfs-cache-workflow" title="Link to this heading">¶</a></h3>
@@ -311,7 +315,7 @@ bridge has failed.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 04 Mar 2025.
+      <span class="lastupdated">Last updated on 05 Mar 2025.
       </span></p>
   </div>
 
