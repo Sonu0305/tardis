@@ -412,7 +412,7 @@ class LogFilter:
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.logging_state">[docs]</a>
 def logging_state(log_level, tardis_config, specific_log_level=None, display_logging_widget=True):
     if display_logging_widget and ENVIRONMENT == &#39;jupyter&#39;:
-        display_handle = display(LOGGER_WIDGET, display_id=&quot;logger_widget&quot;)
+        display_handle = display(LOGGER_WIDGET.embed(), display_id=&quot;logger_widget&quot;)
     elif display_logging_widget and ENVIRONMENT == &#39;vscode&#39;:
         display_handle = None
     else:
