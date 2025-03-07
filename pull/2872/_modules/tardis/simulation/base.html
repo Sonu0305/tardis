@@ -783,8 +783,8 @@ class Simulation(PlasmaStateStorerMixin, HDFWriterMixin):
         )
         for value in plasma_output.split(&quot;\n&quot;):
             output_df = output_df + f&quot;\t{value}\n&quot;
-        logger.info(&quot;\n\tPlasma stratification:&quot;)
-        logger.info(f&quot;\n{output_df}&quot;)
+        # logger.info(&quot;\n\tPlasma stratification:&quot;)
+        # logger.info(f&quot;\n{output_df}&quot;)
 
         logger.info(
             f&quot;\n\tCurrent t_inner = {t_inner:.3f}\n\tExpected t_inner for next iteration = {next_t_inner:.3f}\n&quot;
@@ -1007,7 +1007,7 @@ class Simulation(PlasmaStateStorerMixin, HDFWriterMixin):
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 06 Mar 2025.
+      <span class="lastupdated">Last updated on 07 Mar 2025.
       </span></p>
   </div>
 
