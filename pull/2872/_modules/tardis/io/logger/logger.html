@@ -191,9 +191,12 @@ LOGGER_WIDGET = pn.Tabs(
     height=350,
     sizing_mode=&#39;stretch_width&#39;
 )
+
 if ENVIRONMENT == &#39;vscode&#39;:
     pn.extension()
     display(LOGGER_WIDGET)
+elif os.environ.get(&quot;PANEL_DOCS_BUILD&quot;):
+    pn.extension()
 else:
     pn.extension(comms=&#39;ipywidgets&#39;)
 
