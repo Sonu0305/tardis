@@ -194,13 +194,13 @@
 <dd class="field-odd"><dl class="simple">
 <dt><strong>isotope_dict</strong><span class="classifier">Dict</span></dt><dd><p>dictionary of isotopes for each shell with their <code class="docutils literal notranslate"><span class="pre">masses</span></code>.</p>
 </dd>
-<dt><strong>Returns</strong></dt><dd></dd>
-<dt><strong>——-</strong></dt><dd><dl class="simple">
-<dt>inv<span class="classifier">Dict</span></dt><dd><p>dictionary of inventories for each shell
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>inv</strong><span class="classifier">Dict</span></dt><dd><p>dictionary of inventories for each shell
 {0: &lt;radioactivedecay.inventory.Inventory object at 0x7f8b1c1b3d90&gt;,
 1: &lt;radioactivedecay.inventory.Inventory object at 0x7f8b1c1b3d90&gt;}</p>
-</dd>
-</dl>
 </dd>
 </dl>
 </dd>
@@ -258,6 +258,55 @@ For eg: {0: {‘Ni56’: 0.1, ‘Fe52’: 0.2, ‘Cr48’: 0.3},</p>
 </dl>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="tardis.energy_input.gamma_ray_channel.time_evolve_cumulative_decay">
+<span class="sig-prename descclassname"><span class="pre">tardis.energy_input.gamma_ray_channel.</span></span><span class="sig-name descname"><span class="pre">time_evolve_cumulative_decay</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_isotope_mass_fraction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shell_masses</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma_ray_lines</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/energy_input/gamma_ray_channel.html#time_evolve_cumulative_decay"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.energy_input.gamma_ray_channel.time_evolve_cumulative_decay" title="Link to this definition">¶</a></dt>
+<dd><p>Function to calculate the total decays for each isotope for each shell at each time step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>raw_isotope_mass_fraction</strong><span class="classifier">pd.DataFrame</span></dt><dd><p>isotope abundance in mass fractions.</p>
+</dd>
+<dt><strong>shell_masses</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>shell masses in units of g</p>
+</dd>
+<dt><strong>gamma_ray_lines</strong><span class="classifier">pd.DataFrame</span></dt><dd><p>gamma ray lines from nndc stored as a pandas dataframe.</p>
+</dd>
+<dt><strong>time_array</strong><span class="classifier">numpy.ndarray</span></dt><dd><p>array of time steps in days.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>time_evolve_decay_df</strong><span class="classifier">pd.DataFrame</span></dt><dd><p>dataframe of isotopes for each shell with their decay mode, number of decays, radiation type,
+radiation energy and radiation intensity at each time step.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tardis.energy_input.gamma_ray_channel.time_evolve_mass_fraction">
+<span class="sig-prename descclassname"><span class="pre">tardis.energy_input.gamma_ray_channel.</span></span><span class="sig-name descname"><span class="pre">time_evolve_mass_fraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">raw_isotope_mass_fraction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_array</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/energy_input/gamma_ray_channel.html#time_evolve_mass_fraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.energy_input.gamma_ray_channel.time_evolve_mass_fraction" title="Link to this definition">¶</a></dt>
+<dd><p>Function to evolve the mass fraction of isotopes with time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>raw_isotope_mass_fraction</strong><span class="classifier">pd.DataFrame</span></dt><dd><p>isotope mass fraction in mass fractions.</p>
+</dd>
+<dt><strong>time_array</strong><span class="classifier">np.array</span></dt><dd><p>array of time in days.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>time_evolved_isotope_mass_fraction</strong><span class="classifier">pd.DataFrame</span></dt><dd><p>time evolved mass fraction of isotopes.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -272,7 +321,7 @@ For eg: {0: {‘Ni56’: 0.1, ‘Fe52’: 0.2, ‘Cr48’: 0.3},</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 04 Mar 2025.
+      <span class="lastupdated">Last updated on 11 Mar 2025.
       </span></p>
   </div>
 

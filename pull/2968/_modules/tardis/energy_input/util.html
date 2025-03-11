@@ -219,6 +219,31 @@ def doppler_factor_3d(direction_vector, position_vector, time):
 
 
 
+<div class="viewcode-block" id="doppler_factor_3D_all_packets">
+<a class="viewcode-back" href="../../../api/tardis.energy_input.util.html#tardis.energy_input.util.doppler_factor_3D_all_packets">[docs]</a>
+@njit(**njit_dict_no_parallel)
+def doppler_factor_3D_all_packets(direction_vectors, position_vectors, times):
+    &quot;&quot;&quot;Doppler shift for photons in 3D
+
+    Parameters
+    ----------
+    direction_vectors : array
+    position_vectors : array
+    times : array
+
+    Returns
+    -------
+    array
+        Doppler factors
+    &quot;&quot;&quot;
+    velocity_vector = position_vectors / times
+    vel_mul_dir = np.multiply(velocity_vector, direction_vectors)
+    doppler_factors = 1 - (np.sum(vel_mul_dir, axis=0) / C_CGS)
+
+    return doppler_factors</div>
+
+
+
 <div class="viewcode-block" id="angle_aberration_gamma">
 <a class="viewcode-back" href="../../../api/tardis.energy_input.util.html#tardis.energy_input.util.angle_aberration_gamma">[docs]</a>
 @njit(**njit_dict_no_parallel)
@@ -319,13 +344,13 @@ def solve_quadratic_equation(position, direction, radius):
     a = np.sum(direction**2)
     b = 2.0 * np.sum(position * direction)
     c = -(radius**2) + np.sum(position**2)
-    root = b**2 - 4 * a * c
+    discriminant = b**2 - 4 * a * c
     solution_1 = -np.inf
     solution_2 = -np.inf
-    if root &gt; 0.0:
-        solution_1 = (-b + np.sqrt(root)) / (2 * a)
-        solution_2 = (-b - np.sqrt(root)) / (2 * a)
-    elif root == 0:
+    if discriminant &gt; 0.0:
+        solution_1 = (-b + np.sqrt(discriminant)) / (2 * a)
+        solution_2 = (-b - np.sqrt(discriminant)) / (2 * a)
+    elif discriminant == 0:
         solution_1 = -b / (2 * a)
 
     return solution_1, solution_2</div>
@@ -356,13 +381,13 @@ def solve_quadratic_equation_expanding(position, direction, time, radius):
     a = np.dot(direction, direction) - (radius / light_distance) ** 2.0
     b = 2.0 * (np.dot(position, direction) - radius**2.0 / light_distance)
     c = np.dot(position, position) - radius**2.0
-    root = b**2.0 - 4.0 * a * c
+    discriminant = b**2.0 - 4.0 * a * c
     solution_1 = -np.inf
     solution_2 = -np.inf
-    if root &gt; 0.0:
-        solution_1 = (-b + np.sqrt(root)) / (2.0 * a)
-        solution_2 = (-b - np.sqrt(root)) / (2.0 * a)
-    elif root == 0:
+    if discriminant &gt; 0.0:
+        solution_1 = (-b + np.sqrt(discriminant)) / (2.0 * a)
+        solution_2 = (-b - np.sqrt(discriminant)) / (2.0 * a)
+    elif discriminant == 0:
         solution_1 = -b / (2.0 * a)
 
     return solution_1, solution_2</div>
@@ -570,6 +595,32 @@ def get_index(value, array):
 
     return i</div>
 
+
+
+<div class="viewcode-block" id="make_isotope_string_tardis_like">
+<a class="viewcode-back" href="../../../api/tardis.energy_input.util.html#tardis.energy_input.util.make_isotope_string_tardis_like">[docs]</a>
+def make_isotope_string_tardis_like(isotope_dict):
+    &quot;&quot;&quot;Converts isotope string to TARDIS format
+        Ni-56 -&gt; Ni56, Co-56 -&gt; Co56
+    Parameters
+    ----------
+    isotope : str
+        Isotope string
+
+    Returns
+    -------
+    str
+        TARDIS-like isotope string
+    &quot;&quot;&quot;
+
+    new_isotope_dict = {}
+
+    for key in isotope_dict.keys():
+        new_key = key.replace(&quot;-&quot;, &quot;&quot;)
+        new_isotope_dict[new_key] = isotope_dict[key]
+
+    return new_isotope_dict</div>
+
 </pre></div>
 
            </div>
@@ -580,7 +631,7 @@ def get_index(value, array):
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 04 Mar 2025.
+      <span class="lastupdated">Last updated on 11 Mar 2025.
       </span></p>
   </div>
 

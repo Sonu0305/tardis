@@ -153,7 +153,7 @@
              
   <section id="update-the-regression-data">
 <span id="update-regression-data"></span><h1>Update the Regression Data<a class="headerlink" href="#update-the-regression-data" title="Link to this heading">¶</a></h1>
-<p>A special kind of tests are executed only when <code class="docutils literal notranslate"><span class="pre">pytest</span></code> is called alongside the <code class="docutils literal notranslate"><span class="pre">--regression-data</span></code> flag. These tests compare the output of the TARDIS code (mostly arrays) against the information stored in the regression data files.</p>
+<p>A special kind of tests are executed only when <code class="docutils literal notranslate"><span class="pre">pytest</span></code> is called alongside the <code class="docutils literal notranslate"><span class="pre">--tardis-regression-data</span></code> flag. These tests compare the output of the TARDIS code (mostly arrays) against the information stored in the regression data files.</p>
 <p>TARDIS stores regression data in the <a class="reference external" href="https://github.com/tardis-sn/tardis-regression-data">tardis-regression-data</a> repository. Sometimes, this data needs to be updated. The procedure to update these files has been simplified, allowing for a more straightforward process.</p>
 <p>Imagine you are working on a new feature (or fix) for TARDIS, and you have opened a pull request. If the regression data tests are failing, this could happen for various reasons:</p>
 <ol class="upperalpha simple">
@@ -167,7 +167,7 @@
 <li><p>Fork and clone the <code class="docutils literal notranslate"><span class="pre">tardis-regression-data</span></code> repository.</p></li>
 <li><p>Follow any necessary instructions within your local copy.</p></li>
 <li><p>Go to your local <code class="docutils literal notranslate"><span class="pre">tardis</span></code> repository and ensure you are working on the branch from which you want to generate new regression data.</p></li>
-<li><p>Generate new regression data with <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">tardis</span> <span class="pre">--regression-data=/path/to/tardis-regression-data</span> <span class="pre">--generate-reference</span></code>.</p></li>
+<li><p>Generate new regression data with <code class="docutils literal notranslate"><span class="pre">pytest</span> <span class="pre">tardis</span> <span class="pre">--tardis-regression-data=/path/to/tardis-regression-data</span> <span class="pre">--generate-reference</span></code>.</p></li>
 <li><p>Check your results and ensure everything is correct.</p></li>
 <li><p>Make a new branch in <code class="docutils literal notranslate"><span class="pre">tardis-regression-data</span></code>, push your new regression data, and open a pull request.</p></li>
 </ol>
@@ -186,7 +186,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 04 Mar 2025.
+      <span class="lastupdated">Last updated on 11 Mar 2025.
       </span></p>
   </div>
 
