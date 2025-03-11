@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-53HJHD1BWS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-53HJHD1BWS');
+    </script>
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analysing Montecarlo Packets &mdash; tardis</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+
+  
+    <link rel="shortcut icon" href="../_static/tardis_logo.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link href="../_static/tardis.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            tardis
+          </a>
+              <div class="version">
+                latest
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart for TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../how_to_guides.html">How-To Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/modules.html">API</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Input/Output</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../io/hdf/index.html">Hierarchical Data Format (HDF5)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/configuration/index.html">Configuration (Required Input)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/model/index.html">Reading Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/optional/index.html">Optional Inputs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io/output/index.html">Additional Outputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Analysing Tardis Outputs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="visualization/index.html">Visualization Tools &amp; Widgets</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Physics Walkthrough</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../physics/intro/index.html">Physics Walkthrough Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/setup/index.html">Setting Up the Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/montecarlo/index.html">Monte Carlo Iteration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/update_and_conv/update_and_conv.html">Updating Plasma and Convergence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/spectrum/index.html">Spectrum Generation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../physics/tardisgamma/index.html">TARDIS gamma <span class="math notranslate nohighlight">\(\gamma\)</span></a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Contributing to TARDIS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/CONTRIBUTING.html">Contribution Guidelines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/development/index.html">Developer Workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/tools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/CHANGELOG.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/in_progress/index.html">Features In-Progress</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other Resources</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../resources/credits.html">Credits &amp; Publication Policies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/research_done_using_TARDIS/research_papers.html">Papers Using TARDIS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/code_comparison/index.html">Code Comparison</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources/zreferences.html">References and Glossary</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tardis</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Analysing Montecarlo Packets</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/analysing_tardis_outputs/rpacket_plot_notebook.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <style>
+    /* strip stderr */
+    div.nboutput.container div.output_area.stderr {
+        background: #fdd;
+        display: none;
+    }
+
+    .launch-btn {
+        background-color: #2980B9;
+        border: none;
+        border-radius: 4px;
+        color: #fcfcfc;
+        font-family: inherit;
+        text-decoration: none;
+        padding: 3px 8px;
+        letter-spacing: 0.03em;
+        display: inline-block;
+        line-height: 1.5em;
+    }
+
+    .launch-btn:hover {
+        background-color: #1b6391;
+        color: #fcfcfc;
+    }
+
+    .launch-btn:visited {
+        color: #fcfcfc;
+    }
+
+    .note-p {
+        margin-bottom: 0.4em;
+        line-height: 2em;
+    }
+</style>
+
+<div class="admonition note">
+<p class="note-p">You can interact with this notebook online: <a href="https://mybinder.org/v2/gh/tardis-sn/tardis/HEAD?filepath=docs/analysing_tardis_outputs/rpacket_plot_notebook.ipynb" class="launch-btn" target="_blank" rel="noopener noreferrer">Launch notebook</a></p>
+</div><section id="Analysing-Montecarlo-Packets">
+<h1>Analysing Montecarlo Packets<a class="headerlink" href="#Analysing-Montecarlo-Packets" title="Link to this heading">¶</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">RPacketPlotter</span></code> plots the <code class="docutils literal notranslate"><span class="pre">RPackets</span></code> that are generated by the <a class="reference external" href="https://tardis-sn.github.io/tardis/physics/montecarlo/index.html">Montecarlo</a> method and creates an animated plot that contains the packet trajectories as they move away from the photosphere. The properties of individual RPackets are taken from the <a class="reference external" href="https://tardis-sn.github.io/tardis/io/output/rpacket_tracking.html">rpacket_tracker</a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">RPacketPlotter</span></code> uses the properties (specifically, <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">r</span></code>) present in the <code class="docutils literal notranslate"><span class="pre">rpacket_tracker</span></code> to calculate the coordinates of packets as they move through the ejecta. In the following section, the mathematical expression for getting the angle(θ) of packets with respect to the x-axis is shown, which can be used (along with radius <code class="docutils literal notranslate"><span class="pre">r</span></code>) to calculate the x and y coordinates of packets.</p>
+<section id="Getting-packet-coordinates">
+<h2>Getting packet coordinates<a class="headerlink" href="#Getting-packet-coordinates" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">RPacketPlotter</span></code> uses the properties (specifically, <code class="docutils literal notranslate"><span class="pre">mu</span></code> and <code class="docutils literal notranslate"><span class="pre">r</span></code>) present in the <code class="docutils literal notranslate"><span class="pre">rpacket_tracker</span></code> to calculate the coordinates of packets as they move through the ejecta. In the following section, the mathematical expression for getting the angle(θ) of packets with respect to the x-axis is shown, which can be used (along with radius <code class="docutils literal notranslate"><span class="pre">r</span></code>) to calculate the x and y coordinates of packets. <img alt="32cb58b265fa42b4aa6fcd05636c7681" src="analysing_tardis_outputs/attachment:packet_diagram.jpg" /></p>
+<p>The diagram above shows the packet trajectory as it starts from photosphere <code class="docutils literal notranslate"><span class="pre">P0</span></code> and continues to move along the subsequent points <code class="docutils literal notranslate"><span class="pre">P1</span></code>, <code class="docutils literal notranslate"><span class="pre">P2</span></code>, and so on.</p>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle">Note</p>
+<p>Here <code class="docutils literal notranslate"><span class="pre">μ</span></code> represents the direction of packet propagation with respect to the radial line.</p>
+</div>
+<p>To determine the polar coordinates of any arbitrary point, say <code class="docutils literal notranslate"><span class="pre">P2</span></code>, we need <code class="docutils literal notranslate"><span class="pre">r2</span></code> and <code class="docutils literal notranslate"><span class="pre">θ2</span></code>. <code class="docutils literal notranslate"><span class="pre">r2</span></code> is already present in the array obtained from the simulation. To determine <code class="docutils literal notranslate"><span class="pre">θ2</span></code>, we use the sine rule and apply it to the triangle <code class="docutils literal notranslate"><span class="pre">OP1P2</span></code>, where <code class="docutils literal notranslate"><span class="pre">O</span></code> is the center.</p>
+<div class="math notranslate nohighlight">
+\[\frac{r_{2}}{\sin(\pi - \mu_{1})} = \frac{r_{1}}{\sin(\alpha)}\]</div>
+<p>Now, writing <code class="docutils literal notranslate"><span class="pre">α</span></code> in terms of <code class="docutils literal notranslate"><span class="pre">μ1</span></code> and <code class="docutils literal notranslate"><span class="pre">θ2</span></code></p>
+<div class="math notranslate nohighlight">
+\[α = μ_{1} - θ_{2}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{r_{2}}{\sin(\pi - \mu_{1})} = \frac{r_{1}}{\sin(μ_{1} - θ_{2})}\]</div>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[θ_{2} = -\sin^{-1}(\frac{r1}{r2}\sin(\mu_{1})) + \mu_{1}\]</div>
+<p>Hence, for <code class="docutils literal notranslate"><span class="pre">i-th</span></code> point, <code class="docutils literal notranslate"><span class="pre">θ</span></code> will be:</p>
+<div class="math notranslate nohighlight">
+\[θ_{i} = -\sin^{-1}(\frac{r_{i-1}}{r_{i}}\sin(\mu_{i-1})) + \mu_{i-1}\]</div>
+</section>
+<section id="Running-the-simulation">
+<h2>Running the simulation<a class="headerlink" href="#Running-the-simulation" title="Link to this heading">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+
+<span class="kn">from</span> <span class="nn">tardis</span> <span class="kn">import</span> <span class="n">run_tardis</span>
+<span class="kn">from</span> <span class="nn">tardis.io.atom_data</span> <span class="kn">import</span> <span class="n">download_atom_data</span>
+<span class="kn">from</span> <span class="nn">tardis.io.configuration.config_reader</span> <span class="kn">import</span> <span class="n">Configuration</span>
+
+<span class="c1"># We download the atomic data needed to run the simulation</span>
+<span class="n">download_atom_data</span><span class="p">(</span><span class="s1">&#39;kurucz_cd23_chianti_H_He&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reading the Configuration stored in `tardis_example.yml` into config</span>
+
+<span class="n">config</span> <span class="o">=</span> <span class="n">Configuration</span><span class="o">.</span><span class="n">from_yaml</span><span class="p">(</span><span class="s2">&quot;tardis_example.yml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># changing config file for enabling the rpacket_tracking</span>
+
+<span class="n">config</span><span class="p">[</span><span class="s2">&quot;montecarlo&quot;</span><span class="p">][</span><span class="s2">&quot;tracking&quot;</span><span class="p">][</span><span class="s2">&quot;track_rpacket&quot;</span><span class="p">]</span><span class="o">=</span><span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sim</span> <span class="o">=</span> <span class="n">run_tardis</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">show_progress_bars</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">log_level</span><span class="o">=</span><span class="s1">&#39;ERROR&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Plotting-Packets-with-RPacketPlotter">
+<h2>Plotting Packets with RPacketPlotter<a class="headerlink" href="#Plotting-Packets-with-RPacketPlotter" title="Link to this heading">¶</a></h2>
+<p>Importing the RPacketPlotter</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tardis.visualization</span> <span class="kn">import</span> <span class="n">RPacketPlotter</span>
+</pre></div>
+</div>
+</div>
+<p>Now, we create an RPacketPlotter object <code class="docutils literal notranslate"><span class="pre">rpacket_plotter</span></code> that will be used to generate a plot.</p>
+<p><code class="docutils literal notranslate"><span class="pre">no_of_packets</span></code> can be specified as a parameter to the <code class="docutils literal notranslate"><span class="pre">from_simulation</span></code> class method. By default, <code class="docutils literal notranslate"><span class="pre">15</span></code> packets will used to create a plot.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rpacket_plotter</span> <span class="o">=</span> <span class="n">RPacketPlotter</span><span class="o">.</span><span class="n">from_simulation</span><span class="p">(</span><span class="n">sim</span><span class="p">,</span> <span class="n">no_of_packets</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">rpacket_plotter</span></code> we use the <code class="docutils literal notranslate"><span class="pre">generate_plot</span></code> method to create a plot.</p>
+<p>Here the <code class="docutils literal notranslate"><span class="pre">theme</span></code> parameter can be defined. Currently, we have 2 themes, i.e. <code class="docutils literal notranslate"><span class="pre">light</span></code> and <code class="docutils literal notranslate"><span class="pre">dark</span></code>. By Default the <code class="docutils literal notranslate"><span class="pre">light</span></code> theme will be plotted.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># rpacket_plotter.generate_plot().show(renderer=&quot;notebook_connected&quot;)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Calculating-Data">
+<h2>Calculating Data<a class="headerlink" href="#Calculating-Data" title="Link to this heading">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">theme_colors</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">light</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">linecolor</span><span class="o">=</span><span class="s2">&quot;#555&quot;</span><span class="p">,</span>
+                <span class="n">gridcolor</span><span class="o">=</span><span class="s2">&quot;#fafafa&quot;</span><span class="p">,</span>
+                <span class="n">zerolinecolor</span><span class="o">=</span><span class="s2">&quot;#fafafa&quot;</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#000&quot;</span><span class="p">,</span>
+                <span class="n">photosphere_line_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+                <span class="n">photosphere_fillcolor</span><span class="o">=</span><span class="s2">&quot;darkgrey&quot;</span><span class="p">,</span>
+                <span class="n">shells_line_color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+                <span class="n">packet_line_color</span><span class="o">=</span><span class="s2">&quot;darkslategrey&quot;</span><span class="p">,</span>
+                <span class="n">plot_bgcolor</span><span class="o">=</span><span class="s2">&quot;#fafafa&quot;</span><span class="p">,</span>
+                <span class="n">paper_bgcolor</span><span class="o">=</span><span class="s2">&quot;#fafafa&quot;</span><span class="p">,</span>
+                <span class="n">title_font_color</span><span class="o">=</span><span class="s2">&quot;#444&quot;</span><span class="p">,</span>
+                <span class="n">legendgrouptitle_color</span><span class="o">=</span><span class="s2">&quot;#444&quot;</span><span class="p">,</span>
+                <span class="n">button_bgcolor</span><span class="o">=</span><span class="s2">&quot;#fafafa&quot;</span><span class="p">,</span>
+                <span class="n">button_font_color</span><span class="o">=</span><span class="s2">&quot;#2A3F5F&quot;</span><span class="p">,</span>
+                <span class="n">slider_font_color</span><span class="o">=</span><span class="s2">&quot;#2A3F5F&quot;</span><span class="p">,</span>
+                <span class="n">bordercolor</span><span class="o">=</span><span class="s2">&quot;#BEC8D9&quot;</span><span class="p">,</span>
+                <span class="n">slider_bgcolor</span><span class="o">=</span><span class="s2">&quot;#F8FAFC&quot;</span><span class="p">,</span>
+                <span class="n">slider_activebgcolor</span><span class="o">=</span><span class="s2">&quot;#DBDDE0&quot;</span><span class="p">,</span>
+                <span class="n">slider_currentvalue_color</span><span class="o">=</span><span class="s2">&quot;#2A3F5F&quot;</span><span class="p">,</span>
+                <span class="n">font_color</span><span class="o">=</span><span class="s2">&quot;#000&quot;</span><span class="p">,</span>
+            <span class="p">))</span>
+
+<span class="n">interaction_from_num</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;No Interaction&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;darkslategrey&quot;</span><span class="p">,</span> <span class="s2">&quot;opacity&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;e-Scattering&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#3366FF&quot;</span><span class="p">,</span> <span class="s2">&quot;opacity&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Line Interaction&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;#FF3300&quot;</span><span class="p">,</span> <span class="s2">&quot;opacity&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+        <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">no_of_packets</span><span class="o">=</span><span class="mi">20</span>
+<span class="n">theme</span><span class="o">=</span><span class="s2">&quot;light&quot;</span>
+
+<span class="c1"># getting velocity of different shells</span>
+<span class="n">v_shells</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">simulation_state</span><span class="o">.</span><span class="n">velocity</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+<span class="n">r_packet_tracker</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">transport_state</span><span class="o">.</span><span class="n">rpacket_tracker_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
+        <span class="mi">0</span> <span class="p">:</span> <span class="p">(</span><span class="n">no_of_packets</span><span class="p">)</span>
+    <span class="p">]</span>
+<br/><br/></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for plotting packets at equal intervals throught the circle, we choose thetas distributed uniformly</span>
+<span class="n">thetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">no_of_packets</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">rpackets_x</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">rpackets_y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">rpackets_interactions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># getting coordinates and interaction arrays for all packets</span>
+<span class="k">for</span> <span class="n">packet_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">no_of_packets</span><span class="p">):</span>
+    <span class="n">r_track</span> <span class="o">=</span>  <span class="n">r_packet_tracker</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">packet_no</span><span class="p">][</span><span class="s2">&quot;r&quot;</span><span class="p">]</span>
+    <span class="n">mu_track</span> <span class="o">=</span> <span class="n">r_packet_tracker</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">packet_no</span><span class="p">][</span><span class="s2">&quot;mu&quot;</span><span class="p">]</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">sim</span><span class="o">.</span><span class="n">simulation_state</span><span class="o">.</span><span class="n">time_explosion</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">last_interaction_type</span> <span class="o">=</span> <span class="n">r_packet_tracker</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">packet_no</span><span class="p">][</span><span class="s2">&quot;interaction_type&quot;</span><span class="p">]</span>
+    <span class="n">theta_initial</span> <span class="o">=</span> <span class="n">thetas</span><span class="p">[</span><span class="n">packet_no</span><span class="p">]</span>
+
+    <span class="n">single_rpacket_x</span><span class="p">,</span> <span class="n">single_rpacket_y</span><span class="p">,</span> <span class="n">single_theta</span><span class="p">,</span> <span class="n">single_rpacket_interactions</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+        <span class="c1"># getting thetas at different steps of the packet movement</span>
+
+    <span class="k">for</span> <span class="n">step_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r_track</span><span class="p">)):</span>
+        <span class="c1"># for the first step the packet is at photosphere, so theta will be equal to the intial angle we are launching the packet from</span>
+        <span class="k">if</span> <span class="n">step_no</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">single_theta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">theta_initial</span><span class="p">)</span>
+        <span class="c1"># for further steps we calculate thetas with the formula derived in the documentation</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">r_track</span><span class="p">[</span><span class="n">step_no</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">r_track</span><span class="p">[</span><span class="n">step_no</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]:</span>
+                <span class="n">single_theta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">single_theta</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+                    <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span>
+                        <span class="n">r_track</span><span class="p">[</span><span class="n">step_no</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                        <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">mu_track</span><span class="p">[</span><span class="n">step_no</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+                        <span class="o">/</span> <span class="n">r_track</span><span class="p">[</span><span class="n">step_no</span><span class="p">]</span>
+                    <span class="p">)</span>
+                    <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">mu_track</span><span class="p">[</span><span class="n">step_no</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">single_theta</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">single_theta</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">(</span>
+                        <span class="o">-</span><span class="mi">1</span>
+                        <span class="o">*</span> <span class="n">r_track</span><span class="p">[</span><span class="n">step_no</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+                        <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">mu_track</span><span class="p">[</span><span class="n">step_no</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+                        <span class="o">/</span> <span class="n">r_track</span><span class="p">[</span><span class="n">step_no</span><span class="p">]</span>
+                    <span class="p">)</span>
+                    <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">acos</span><span class="p">(</span><span class="n">mu_track</span><span class="p">[</span><span class="n">step_no</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+                <span class="p">)</span>
+
+    <span class="c1"># converting the thetas into x and y coordinates using radius as radius*cos(theta) and radius*sin(theta) respectively</span>
+    <span class="n">single_rpacket_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r_track</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">single_theta</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e-5</span> <span class="o">/</span> <span class="n">time</span>
+    <span class="n">single_rpacket_y</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r_track</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">single_theta</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e-5</span> <span class="o">/</span> <span class="n">time</span>
+
+    <span class="c1"># adding interactions at different steps</span>
+    <span class="c1"># using the change of slope of the trajectory line at different steps, we determine if an interactions happened or not.</span>
+
+    <span class="k">for</span> <span class="n">step_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">r_track</span><span class="p">)):</span>
+        <span class="c1"># when packet is at its starting and ending point in its trajectory, we consider it as no interaction</span>
+        <span class="k">if</span> <span class="n">step_no</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">step_no</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">r_track</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">single_rpacket_interactions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># current slope is the slope of line from previous position of the packet to the current position</span>
+            <span class="n">single_rpacket_interactions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">last_interaction_type</span><span class="p">[</span><span class="n">step_no</span><span class="p">])</span>
+
+    <span class="n">rpackets_x</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_rpacket_x</span><span class="p">)</span>
+    <span class="n">rpackets_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_rpacket_y</span><span class="p">)</span>
+    <span class="n">rpackets_interactions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">single_rpacket_interactions</span><span class="p">)</span>
+
+<span class="n">np_rpackets_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rpackets_x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;object&quot;</span><span class="p">)</span>
+<span class="n">np_rpackets_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rpackets_y</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;object&quot;</span><span class="p">)</span>
+<span class="n">np_rpackets_interactions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rpackets_interactions</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;object&quot;</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rpacket_step_no_array_max_size</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">len</span><span class="p">,</span> <span class="n">np_rpackets_x</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">packet_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np_rpackets_x</span><span class="p">)):</span>
+    <span class="c1"># making all coordinate arrays of size `rpacket_step_no_array_max_size` by repeating the last element across the remaining length of array</span>
+    <span class="n">np_rpackets_x</span><span class="p">[</span><span class="n">packet_no</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">np_rpackets_x</span><span class="p">[</span><span class="n">packet_no</span><span class="p">],</span>
+        <span class="n">np_rpackets_x</span><span class="p">[</span><span class="n">packet_no</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">rpacket_step_no_array_max_size</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">np_rpackets_x</span><span class="p">[</span><span class="n">packet_no</span><span class="p">])]</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">np_rpackets_y</span><span class="p">[</span><span class="n">packet_no</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">np_rpackets_y</span><span class="p">[</span><span class="n">packet_no</span><span class="p">],</span>
+        <span class="n">np_rpackets_y</span><span class="p">[</span><span class="n">packet_no</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">rpacket_step_no_array_max_size</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">np_rpackets_y</span><span class="p">[</span><span class="n">packet_no</span><span class="p">])]</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">np_rpackets_interactions</span><span class="p">[</span><span class="n">packet_no</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">np_rpackets_interactions</span><span class="p">[</span><span class="n">packet_no</span><span class="p">],</span>
+        <span class="n">np_rpackets_interactions</span><span class="p">[</span><span class="n">packet_no</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">rpacket_step_no_array_max_size</span>
+                <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">np_rpackets_interactions</span><span class="p">[</span><span class="n">packet_no</span><span class="p">])</span>
+            <span class="p">]</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="c1"># Set axes properties</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span>
+    <span class="n">scaleanchor</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
+    <span class="n">scaleratio</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.1</span> <span class="o">*</span> <span class="n">v_shells</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mf">1.1</span> <span class="o">*</span> <span class="n">v_shells</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Velocity (km/s)&quot;</span><span class="p">,</span>
+    <span class="n">exponentformat</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;color&quot;</span><span class="p">],</span>
+    <span class="n">linecolor</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;linecolor&quot;</span><span class="p">],</span>
+    <span class="n">gridcolor</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;gridcolor&quot;</span><span class="p">],</span>
+    <span class="n">zerolinecolor</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;zerolinecolor&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
+    <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">1.1</span> <span class="o">*</span> <span class="n">v_shells</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mf">1.1</span> <span class="o">*</span> <span class="n">v_shells</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Velocity (km/s)&quot;</span><span class="p">,</span>
+    <span class="n">exponentformat</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;color&quot;</span><span class="p">],</span>
+    <span class="n">linecolor</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;linecolor&quot;</span><span class="p">],</span>
+    <span class="n">gridcolor</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;gridcolor&quot;</span><span class="p">],</span>
+    <span class="n">zerolinecolor</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;zerolinecolor&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># adding the shells and photosphere</span>
+<span class="k">for</span> <span class="n">shell_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">simulation_state</span><span class="o">.</span><span class="n">radius</span><span class="o">.</span><span class="n">value</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">shell_no</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># photosphere</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_shape</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;circle&quot;</span><span class="p">,</span>
+            <span class="n">xref</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+            <span class="n">yref</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
+            <span class="n">x0</span><span class="o">=-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">v_shells</span><span class="p">[</span><span class="n">shell_no</span><span class="p">],</span>
+            <span class="n">y0</span><span class="o">=-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">v_shells</span><span class="p">[</span><span class="n">shell_no</span><span class="p">],</span>
+            <span class="n">x1</span><span class="o">=</span><span class="n">v_shells</span><span class="p">[</span><span class="n">shell_no</span><span class="p">],</span>
+            <span class="n">y1</span><span class="o">=</span><span class="n">v_shells</span><span class="p">[</span><span class="n">shell_no</span><span class="p">],</span>
+            <span class="n">line_color</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span>
+                <span class="s2">&quot;photosphere_line_color&quot;</span>
+            <span class="p">],</span>
+            <span class="n">fillcolor</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;photosphere_fillcolor&quot;</span><span class="p">],</span>
+            <span class="n">opacity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">shell_no</span> <span class="o">==</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sim</span><span class="o">.</span><span class="n">simulation_state</span><span class="o">.</span><span class="n">radius</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># outermost shell</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_shape</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;circle&quot;</span><span class="p">,</span>
+            <span class="n">xref</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+            <span class="n">yref</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
+            <span class="n">x0</span><span class="o">=-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">v_shells</span><span class="p">[</span><span class="n">shell_no</span><span class="p">],</span>
+            <span class="n">y0</span><span class="o">=-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">v_shells</span><span class="p">[</span><span class="n">shell_no</span><span class="p">],</span>
+            <span class="n">x1</span><span class="o">=</span><span class="n">v_shells</span><span class="p">[</span><span class="n">shell_no</span><span class="p">],</span>
+            <span class="n">y1</span><span class="o">=</span><span class="n">v_shells</span><span class="p">[</span><span class="n">shell_no</span><span class="p">],</span>
+            <span class="n">line_color</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;shells_line_color&quot;</span><span class="p">],</span>
+            <span class="n">opacity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># remaining shells</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">add_shape</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;circle&quot;</span><span class="p">,</span>
+            <span class="n">xref</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+            <span class="n">yref</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
+            <span class="n">x0</span><span class="o">=-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">v_shells</span><span class="p">[</span><span class="n">shell_no</span><span class="p">],</span>
+            <span class="n">y0</span><span class="o">=-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">v_shells</span><span class="p">[</span><span class="n">shell_no</span><span class="p">],</span>
+            <span class="n">x1</span><span class="o">=</span><span class="n">v_shells</span><span class="p">[</span><span class="n">shell_no</span><span class="p">],</span>
+            <span class="n">y1</span><span class="o">=</span><span class="n">v_shells</span><span class="p">[</span><span class="n">shell_no</span><span class="p">],</span>
+            <span class="n">line_color</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;shells_line_color&quot;</span><span class="p">],</span>
+            <span class="n">opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<span class="k">for</span> <span class="n">packet_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np_rpackets_x</span><span class="p">)):</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+        <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+            <span class="n">x</span><span class="o">=</span><span class="n">np_rpackets_x</span><span class="p">[</span><span class="n">packet_no</span><span class="p">],</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">np_rpackets_y</span><span class="p">[</span><span class="n">packet_no</span><span class="p">],</span>
+            <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers+lines&quot;</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Packet &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">packet_no</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">hovertemplate</span><span class="o">=</span><span class="s2">&quot;&lt;b&gt;X&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s2">&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;&lt;br&gt;&lt;b&gt;Y&lt;/b&gt;: %</span><span class="si">{y}</span><span class="s2">&lt;br&gt;&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;&lt;b&gt;Last Interaction: %</span><span class="si">{text}</span><span class="s2">&lt;/b&gt;&quot;</span><span class="p">,</span>
+            <span class="n">text</span><span class="o">=</span><span class="p">[</span>
+                <span class="n">interaction_from_num</span><span class="p">[</span>
+                    <span class="nb">int</span><span class="p">(</span><span class="n">np_rpackets_interactions</span><span class="p">[</span><span class="n">packet_no</span><span class="p">][</span><span class="n">step_no</span><span class="p">])</span>
+                <span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">step_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np_rpackets_x</span><span class="p">[</span><span class="n">packet_no</span><span class="p">]))</span>
+            <span class="p">],</span>
+            <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;packet_line_color&quot;</span><span class="p">]</span>
+            <span class="p">),</span>
+            <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">opacity</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">interaction_from_num</span><span class="p">[</span>
+                        <span class="nb">int</span><span class="p">(</span><span class="n">np_rpackets_interactions</span><span class="p">[</span><span class="n">packet_no</span><span class="p">][</span><span class="n">step_no</span><span class="p">])</span>
+                    <span class="p">][</span><span class="s2">&quot;opacity&quot;</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">step_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np_rpackets_x</span><span class="p">[</span><span class="n">packet_no</span><span class="p">]))</span>
+                <span class="p">],</span>
+                <span class="n">color</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">interaction_from_num</span><span class="p">[</span>
+                        <span class="nb">int</span><span class="p">(</span><span class="n">np_rpackets_interactions</span><span class="p">[</span><span class="n">packet_no</span><span class="p">][</span><span class="n">step_no</span><span class="p">])</span>
+                    <span class="p">][</span><span class="s2">&quot;color&quot;</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">step_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np_rpackets_x</span><span class="p">[</span><span class="n">packet_no</span><span class="p">]))</span>
+                <span class="p">],</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+<span class="c1"># adding legends</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">9999999</span><span class="p">],</span>
+        <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">legendgroup</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">,</span>
+        <span class="n">opacity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">legendgrouptitle</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;legendgrouptitle_color&quot;</span><span class="p">]</span>
+            <span class="p">),</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Interaction Type:&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines+markers&quot;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;e-scattering&quot;</span><span class="p">,</span>
+        <span class="n">hoverlabel</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#222&quot;</span><span class="p">)),</span>
+        <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#3366FF&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+    <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">9999999</span><span class="p">],</span>
+        <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+        <span class="n">legendgroup</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">,</span>
+        <span class="n">opacity</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines+markers&quot;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Line Interaction&quot;</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#FF3300&quot;</span><span class="p">),</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># Set figure size</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">plot_bgcolor</span> <span class="o">=</span> <span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;plot_bgcolor&quot;</span><span class="p">]</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">paper_bgcolor</span> <span class="o">=</span> <span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span>
+    <span class="s2">&quot;paper_bgcolor&quot;</span>
+<span class="p">]</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">820</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">680</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Packet Trajectories&quot;</span><span class="p">,</span>
+    <span class="n">title_font_color</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;title_font_color&quot;</span><span class="p">],</span>
+    <span class="n">font_color</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;font_color&quot;</span><span class="p">],</span>
+    <span class="n">updatemenus</span><span class="o">=</span><span class="p">[</span>
+        <span class="nb">dict</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;buttons&quot;</span><span class="p">,</span>
+            <span class="n">xanchor</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span>
+            <span class="n">x</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">yanchor</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span>
+            <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span>
+            <span class="n">pad</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="mi">87</span><span class="p">},</span>
+            <span class="n">showactive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">bgcolor</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;button_bgcolor&quot;</span><span class="p">],</span>
+            <span class="n">bordercolor</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;bordercolor&quot;</span><span class="p">],</span>
+            <span class="n">font</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;button_font_color&quot;</span><span class="p">]</span>
+            <span class="p">},</span>
+            <span class="n">buttons</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="kc">None</span><span class="p">,</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;frame&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span> <span class="s2">&quot;redraw&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                            <span class="s2">&quot;fromcurrent&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                            <span class="s2">&quot;transition&quot;</span><span class="p">:</span> <span class="p">{</span>
+                                <span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+                                <span class="s2">&quot;easing&quot;</span><span class="p">:</span> <span class="s2">&quot;quadratic-in-out&quot;</span><span class="p">,</span>
+                            <span class="p">},</span>
+                        <span class="p">},</span>
+                    <span class="p">],</span>
+                    <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Play&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;animate&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="p">[</span><span class="kc">None</span><span class="p">],</span>
+                        <span class="p">{</span>
+                            <span class="s2">&quot;frame&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;redraw&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                            <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;immediate&quot;</span><span class="p">,</span>
+                            <span class="s2">&quot;transition&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+                        <span class="p">},</span>
+                    <span class="p">],</span>
+                    <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="s2">&quot;Pause&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;animate&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+
+<span class="c1"># adding frames</span>
+<span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rpacket_step_no_array_max_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">frame_data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">packet_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np_rpackets_x</span><span class="p">)):</span>
+        <span class="c1"># adding a scatter object containing the trajectory of a packet upto a particular frame number</span>
+        <span class="n">frame_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">np_rpackets_x</span><span class="p">[</span><span class="n">packet_no</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="n">frame</span><span class="p">],</span>
+                <span class="n">y</span><span class="o">=</span><span class="n">np_rpackets_y</span><span class="p">[</span><span class="n">packet_no</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="n">frame</span><span class="p">],</span>
+                <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers+lines&quot;</span><span class="p">,</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Packet &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">packet_no</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">hovertemplate</span><span class="o">=</span><span class="s2">&quot;&lt;b&gt;X&lt;/b&gt;: %</span><span class="si">{x}</span><span class="s2">&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;&lt;br&gt;&lt;b&gt;Y&lt;/b&gt;: %</span><span class="si">{y}</span><span class="s2">&lt;br&gt;&quot;</span>
+                <span class="o">+</span> <span class="s2">&quot;&lt;b&gt;Last Interaction: %</span><span class="si">{text}</span><span class="s2">&lt;/b&gt;&quot;</span><span class="p">,</span>
+                <span class="n">text</span><span class="o">=</span><span class="p">[</span>
+                    <span class="n">interaction_from_num</span><span class="p">[</span>
+                        <span class="nb">int</span><span class="p">(</span><span class="n">np_rpackets_interactions</span><span class="p">[</span><span class="n">packet_no</span><span class="p">][</span><span class="n">step_no</span><span class="p">])</span>
+                    <span class="p">][</span><span class="s2">&quot;text&quot;</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">step_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np_rpackets_x</span><span class="p">[</span><span class="n">packet_no</span><span class="p">]))</span>
+                <span class="p">],</span>
+                <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">color</span><span class="o">=</span><span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;packet_line_color&quot;</span><span class="p">]</span>
+                <span class="p">),</span>
+                <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+                    <span class="n">opacity</span><span class="o">=</span><span class="p">[</span>
+                        <span class="n">interaction_from_num</span><span class="p">[</span>
+                            <span class="nb">int</span><span class="p">(</span><span class="n">np_rpackets_interactions</span><span class="p">[</span><span class="n">packet_no</span><span class="p">][</span><span class="n">step_no</span><span class="p">])</span>
+                        <span class="p">][</span><span class="s2">&quot;opacity&quot;</span><span class="p">]</span>
+                        <span class="k">for</span> <span class="n">step_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np_rpackets_x</span><span class="p">[</span><span class="n">packet_no</span><span class="p">]))</span>
+                    <span class="p">],</span>
+                    <span class="n">color</span><span class="o">=</span><span class="p">[</span>
+                        <span class="n">interaction_from_num</span><span class="p">[</span>
+                            <span class="nb">int</span><span class="p">(</span><span class="n">np_rpackets_interactions</span><span class="p">[</span><span class="n">packet_no</span><span class="p">][</span><span class="n">step_no</span><span class="p">])</span>
+                        <span class="p">][</span><span class="s2">&quot;color&quot;</span><span class="p">]</span>
+                        <span class="k">for</span> <span class="n">step_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np_rpackets_x</span><span class="p">[</span><span class="n">packet_no</span><span class="p">]))</span>
+                    <span class="p">],</span>
+                <span class="p">),</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">frame_data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">frame</span><span class="p">)]</span>
+
+<span class="c1"># adding timeline slider</span>
+<span class="n">slider_steps</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">step_no</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rpacket_step_no_array_max_size</span><span class="p">):</span>
+    <span class="n">slider_steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">[</span><span class="n">step_no</span><span class="p">],</span>
+                <span class="p">{</span>
+                    <span class="s2">&quot;frame&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="s2">&quot;redraw&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+                    <span class="s2">&quot;mode&quot;</span><span class="p">:</span> <span class="s2">&quot;immediate&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;transition&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">},</span>
+                <span class="p">},</span>
+            <span class="p">],</span>
+            <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">step_no</span><span class="p">,</span>
+            <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;animate&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">sliders</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;active&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;activebgcolor&quot;</span><span class="p">:</span> <span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span>
+            <span class="s2">&quot;slider_activebgcolor&quot;</span>
+        <span class="p">],</span>
+        <span class="s2">&quot;bgcolor&quot;</span><span class="p">:</span> <span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;slider_bgcolor&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;bordercolor&quot;</span><span class="p">:</span> <span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;bordercolor&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;yanchor&quot;</span><span class="p">:</span> <span class="s2">&quot;top&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;xanchor&quot;</span><span class="p">:</span> <span class="s2">&quot;left&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;currentvalue&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span>
+                    <span class="s2">&quot;slider_currentvalue_color&quot;</span>
+                <span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;Step:&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;visible&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">&quot;xanchor&quot;</span><span class="p">:</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="n">theme_colors</span><span class="p">[</span><span class="n">theme</span><span class="p">][</span><span class="s2">&quot;slider_font_color&quot;</span><span class="p">]</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;transition&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;duration&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="s2">&quot;easing&quot;</span><span class="p">:</span> <span class="s2">&quot;cubic-in-out&quot;</span><span class="p">},</span>
+        <span class="s2">&quot;pad&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">},</span>
+        <span class="s2">&quot;len&quot;</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+        <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
+        <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;steps&quot;</span><span class="p">:</span> <span class="n">slider_steps</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">]</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">renderer</span><span class="o">=</span><span class="s2">&quot;notebook_connected&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<script type="text/javascript">
+window.PlotlyConfig = {MathJaxConfig: 'local'};
+if (window.MathJax && window.MathJax.Hub && window.MathJax.Hub.Config) {window.MathJax.Hub.Config({SVG: {font: "STIX-Web"}});}
+if (typeof require !== 'undefined') {
+require.undef("plotly");
+requirejs.config({
+    paths: {
+        'plotly': ['https://cdn.plot.ly/plotly-2.32.0.min']
+    }
+});
+require(['plotly'], function(Plotly) {
+    window._Plotly = Plotly;
+});
+}
+</script></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<div>                            <div id="082e36e0-8b99-4b04-81b5-a607cd1f90f5" class="plotly-graph-div" style="height:680px; width:820px;"></div>            <script type="text/javascript">                require(["plotly"], function(Plotly) {                    window.PLOTLYENV=window.PLOTLYENV || {};                                    if (document.getElementById("082e36e0-8b99-4b04-81b5-a607cd1f90f5")) {                    Plotly.newPlot(                        "082e36e0-8b99-4b04-81b5-a607cd1f90f5",                        [{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#FF3300","#FF3300","#FF3300","#FF3300","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,1,1,1,0,0,0]},"mode":"markers+lines","name":"Packet 1","showlegend":false,"text":["No Interaction","Line Interaction","Line Interaction","Line Interaction","Line Interaction","No Interaction","No Interaction","No Interaction"],"x":[11000.000000000002,11269.016616640021,11096.775602938753,11096.966360578102,11091.09207130687,10904.73005518225,10904.73005518225,10904.73005518225],"y":[0.0,173.93300326322492,391.4891952289794,402.7302084811953,967.504824106094,1444.5976684201585,1444.5976684201585,1444.5976684201585],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 2","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[10461.62167924669,16029.62021867329,16029.62021867329,16029.62021867329,16029.62021867329,16029.62021867329,16029.62021867329,16029.62021867329],"y":[3399.186938124422,11960.40449337315,11960.40449337315,11960.40449337315,11960.40449337315,11960.40449337315,11960.40449337315,11960.40449337315],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","#3366FF","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,1,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 3","showlegend":false,"text":["No Interaction","e-Scattering","e-Scattering","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[8899.186938124423,8679.102460064958,7438.223034288072,6603.8943139506455,6603.8943139506455,6603.8943139506455,6603.8943139506455,6603.8943139506455],"y":[6465.637775217205,7392.500185674034,9027.27263679088,8797.077917704852,8797.077917704852,8797.077917704852,8797.077917704852,8797.077917704852],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 4","showlegend":false,"text":["No Interaction","e-Scattering","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[6465.637775217205,6426.430708887942,6298.939245784077,6298.939245784077,6298.939245784077,6298.939245784077,6298.939245784077,6298.939245784077],"y":[8899.186938124423,9157.335910089561,9017.94679391718,9017.94679391718,9017.94679391718,9017.94679391718,9017.94679391718,9017.94679391718],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 5","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[3399.1869381244223,1128.0268702014869,1128.0268702014869,1128.0268702014869,1128.0268702014869,1128.0268702014869,1128.0268702014869,1128.0268702014869],"y":[10461.62167924669,19968.16354550672,19968.16354550672,19968.16354550672,19968.16354550672,19968.16354550672,19968.16354550672,19968.16354550672],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 6","showlegend":false,"text":["No Interaction","e-Scattering","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[6.735557395310444e-13,-15.72442943694869,-10727.600692817054,-10727.600692817054,-10727.600692817054,-10727.600692817054,-10727.600692817054,-10727.600692817054],"y":[11000.000000000002,11031.629190935751,16879.53149158682,16879.53149158682,16879.53149158682,16879.53149158682,16879.53149158682,16879.53149158682],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 7","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-3399.186938124421,-14285.203182736017,-14285.203182736017,-14285.203182736017,-14285.203182736017,-14285.203182736017,-14285.203182736017,-14285.203182736017],"y":[10461.621679246691,13997.605867717124,13997.605867717124,13997.605867717124,13997.605867717124,13997.605867717124,13997.605867717124,13997.605867717124],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 8","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-6465.637775217204,-13444.083244886437,-13444.083244886437,-13444.083244886437,-13444.083244886437,-13444.083244886437,-13444.083244886437,-13444.083244886437],"y":[8899.186938124423,14807.316627416456,14807.316627416456,14807.316627416456,14807.316627416456,14807.316627416456,14807.316627416456,14807.316627416456],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 9","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-8899.186938124421,-19036.198908386436,-19036.198908386436,-19036.198908386436,-19036.198908386436,-19036.198908386436,-19036.198908386436,-19036.198908386436],"y":[6465.637775217206,6133.769731604464,6133.769731604464,6133.769731604464,6133.769731604464,6133.769731604464,6133.769731604464,6133.769731604464],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#FF3300","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 10","showlegend":false,"text":["No Interaction","Line Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-10461.62167924669,-11311.463345121349,-10991.81867211787,-10991.81867211787,-10991.81867211787,-10991.81867211787,-10991.81867211787,-10991.81867211787],"y":[3399.186938124423,3507.5046501357206,424.17246407680506,424.17246407680506,424.17246407680506,424.17246407680506,424.17246407680506,424.17246407680506],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","#FF3300","#FF3300","#FF3300","#FF3300","#FF3300","darkslategrey"],"opacity":[0,1,1,1,1,1,1,0]},"mode":"markers+lines","name":"Packet 11","showlegend":false,"text":["No Interaction","e-Scattering","Line Interaction","Line Interaction","Line Interaction","Line Interaction","Line Interaction","No Interaction"],"x":[-11000.000000000002,-13152.15774253363,-11715.796018946668,-13862.228426493159,-13837.597668844859,-13634.348387808042,-11990.334312272596,-4279.570443210387],"y":[1.3471114790620889e-12,-2964.903948910639,-3872.741713095448,-6255.277571147606,-6674.1084590484525,-7569.261020356157,-13320.751685329498,-19536.767307351547],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","#3366FF","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,1,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 12","showlegend":false,"text":["No Interaction","e-Scattering","e-Scattering","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-10461.621679246691,-10706.738835151042,-9324.293931765818,-1099.5748438555877,-1099.5748438555877,-1099.5748438555877,-1099.5748438555877,-1099.5748438555877],"y":[-3399.1869381244205,-4910.3910816270145,-8822.42475909818,-19969.75050326769,-19969.75050326769,-19969.75050326769,-19969.75050326769,-19969.75050326769],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","#FF3300","#3366FF","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,1,1,0,0,0,0]},"mode":"markers+lines","name":"Packet 13","showlegend":false,"text":["No Interaction","e-Scattering","Line Interaction","e-Scattering","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-8899.186938124425,-8853.272579451035,-8864.192425644635,-8267.627119630628,-7623.465877144973,-7623.465877144973,-7623.465877144973,-7623.465877144973],"y":[-6465.637775217204,-6746.438508123706,-6793.44702337376,-7413.032652965026,-7929.865573892547,-7929.865573892547,-7929.865573892547,-7929.865573892547],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#FF3300","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 14","showlegend":false,"text":["No Interaction","Line Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-6465.637775217206,-6432.424452457651,-6119.634962986705,-6119.634962986705,-6119.634962986705,-6119.634962986705,-6119.634962986705,-6119.634962986705],"y":[-8899.186938124421,-9237.325670431555,-9140.57262537696,-9140.57262537696,-9140.57262537696,-9140.57262537696,-9140.57262537696,-9140.57262537696],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 15","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-3399.1869381244232,-558.1623578647619,-558.1623578647619,-558.1623578647619,-558.1623578647619,-558.1623578647619,-558.1623578647619,-558.1623578647619],"y":[-10461.62167924669,-19992.20985239658,-19992.20985239658,-19992.20985239658,-19992.20985239658,-19992.20985239658,-19992.20985239658,-19992.20985239658],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","#FF3300","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,1,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 16","showlegend":false,"text":["No Interaction","e-Scattering","Line Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-2.020667218593133e-12,1289.3398088252777,2685.0831402302615,6378.507371185572,6378.507371185572,6378.507371185572,6378.507371185572,6378.507371185572],"y":[-11000.000000000002,-11220.624496398368,-12025.195877116294,-18955.59663307202,-18955.59663307202,-18955.59663307202,-18955.59663307202,-18955.59663307202],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 17","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[3399.18693812442,7531.117015249097,7531.117015249097,7531.117015249097,7531.117015249097,7531.117015249097,7531.117015249097,7531.117015249097],"y":[-10461.621679246691,-18527.87835945135,-18527.87835945135,-18527.87835945135,-18527.87835945135,-18527.87835945135,-18527.87835945135,-18527.87835945135],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 18","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[6465.637775217202,14694.622131172458,14694.622131172458,14694.622131172458,14694.622131172458,14694.622131172458,14694.622131172458,14694.622131172458],"y":[-8899.186938124425,-13567.169211816321,-13567.169211816321,-13567.169211816321,-13567.169211816321,-13567.169211816321,-13567.169211816321,-13567.169211816321],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 19","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[8899.186938124421,19747.933640952837,19747.933640952837,19747.933640952837,19747.933640952837,19747.933640952837,19747.933640952837,19747.933640952837],"y":[-6465.6377752172075,-3165.2988662247103,-3165.2988662247103,-3165.2988662247103,-3165.2988662247103,-3165.2988662247103,-3165.2988662247103,-3165.2988662247103],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#FF3300","#3366FF","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,1,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 20","showlegend":false,"text":["No Interaction","Line Interaction","e-Scattering","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[10461.62167924669,11373.86146794324,11978.217687904193,16714.38774233118,16714.38774233118,16714.38774233118,16714.38774233118,16714.38774233118],"y":[-3399.1869381244237,-2800.413496307708,651.4481949339583,10983.13445237785,10983.13445237785,10983.13445237785,10983.13445237785,10983.13445237785],"type":"scatter"},{"hoverlabel":{"font":{"color":"#222"}},"legendgroup":"a","legendgrouptitle":{"font":{"color":"#444"},"text":"Interaction Type:"},"marker":{"color":"#3366FF"},"mode":"lines+markers","name":"e-scattering","opacity":1,"x":[9999999],"y":[0],"type":"scatter"},{"legendgroup":"a","marker":{"color":"#FF3300"},"mode":"lines+markers","name":"Line Interaction","opacity":1,"x":[9999999],"y":[0],"type":"scatter"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmapgl":[{"type":"heatmapgl","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"xaxis":{"scaleanchor":"y","scaleratio":1,"range":[-22000.0,22000.0],"title":{"text":"Velocity (km\u002fs)"},"exponentformat":"none","color":"#000","linecolor":"#555","gridcolor":"#fafafa","zerolinecolor":"#fafafa"},"yaxis":{"range":[-22000.0,22000.0],"title":{"text":"Velocity (km\u002fs)"},"exponentformat":"none","color":"#000","linecolor":"#555","gridcolor":"#fafafa","zerolinecolor":"#fafafa"},"shapes":[{"fillcolor":"darkgrey","line":{"color":"black"},"opacity":1,"type":"circle","x0":-11000.0,"x1":11000.0,"xref":"x","y0":-11000.0,"y1":11000.0,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-11450.000000000002,"x1":11450.000000000002,"xref":"x","y0":-11450.000000000002,"y1":11450.000000000002,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-11900.000000000002,"x1":11900.000000000002,"xref":"x","y0":-11900.000000000002,"y1":11900.000000000002,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-12350.000000000002,"x1":12350.000000000002,"xref":"x","y0":-12350.000000000002,"y1":12350.000000000002,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-12800.000000000002,"x1":12800.000000000002,"xref":"x","y0":-12800.000000000002,"y1":12800.000000000002,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-13250.000000000002,"x1":13250.000000000002,"xref":"x","y0":-13250.000000000002,"y1":13250.000000000002,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-13700.000000000002,"x1":13700.000000000002,"xref":"x","y0":-13700.000000000002,"y1":13700.000000000002,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-14150.000000000002,"x1":14150.000000000002,"xref":"x","y0":-14150.000000000002,"y1":14150.000000000002,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-14600.000000000002,"x1":14600.000000000002,"xref":"x","y0":-14600.000000000002,"y1":14600.000000000002,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-15050.000000000002,"x1":15050.000000000002,"xref":"x","y0":-15050.000000000002,"y1":15050.000000000002,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-15500.000000000002,"x1":15500.000000000002,"xref":"x","y0":-15500.000000000002,"y1":15500.000000000002,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-15950.000000000002,"x1":15950.000000000002,"xref":"x","y0":-15950.000000000002,"y1":15950.000000000002,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-16400.0,"x1":16400.0,"xref":"x","y0":-16400.0,"y1":16400.0,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-16850.0,"x1":16850.0,"xref":"x","y0":-16850.0,"y1":16850.0,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-17300.0,"x1":17300.0,"xref":"x","y0":-17300.0,"y1":17300.0,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-17750.0,"x1":17750.0,"xref":"x","y0":-17750.0,"y1":17750.0,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-18200.0,"x1":18200.0,"xref":"x","y0":-18200.0,"y1":18200.0,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-18650.0,"x1":18650.0,"xref":"x","y0":-18650.0,"y1":18650.0,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-19100.0,"x1":19100.0,"xref":"x","y0":-19100.0,"y1":19100.0,"yref":"y"},{"line":{"color":"black"},"opacity":0.2,"type":"circle","x0":-19550.0,"x1":19550.0,"xref":"x","y0":-19550.0,"y1":19550.0,"yref":"y"},{"line":{"color":"black"},"opacity":1,"type":"circle","x0":-20000.0,"x1":20000.0,"xref":"x","y0":-20000.0,"y1":20000.0,"yref":"y"}],"plot_bgcolor":"#fafafa","paper_bgcolor":"#fafafa","title":{"text":"Packet Trajectories","font":{"color":"#444"}},"font":{"color":"#000"},"width":820,"height":680,"updatemenus":[{"bgcolor":"#fafafa","bordercolor":"#BEC8D9","buttons":[{"args":[null,{"frame":{"duration":500,"redraw":false},"fromcurrent":true,"transition":{"duration":300,"easing":"quadratic-in-out"}}],"label":"Play","method":"animate"},{"args":[[null],{"frame":{"duration":0,"redraw":false},"mode":"immediate","transition":{"duration":0}}],"label":"Pause","method":"animate"}],"direction":"left","font":{"color":"#2A3F5F"},"pad":{"r":10,"t":87},"showactive":false,"type":"buttons","x":0.1,"xanchor":"right","y":0,"yanchor":"top"}],"sliders":[{"active":0,"activebgcolor":"#DBDDE0","bgcolor":"#F8FAFC","bordercolor":"#BEC8D9","currentvalue":{"font":{"color":"#2A3F5F"},"prefix":"Step:","visible":true,"xanchor":"right"},"font":{"color":"#2A3F5F"},"len":0.9,"pad":{"b":10,"t":50},"steps":[{"args":[[0],{"frame":{"duration":300,"redraw":false},"mode":"immediate","transition":{"duration":300}}],"label":"0","method":"animate"},{"args":[[1],{"frame":{"duration":300,"redraw":false},"mode":"immediate","transition":{"duration":300}}],"label":"1","method":"animate"},{"args":[[2],{"frame":{"duration":300,"redraw":false},"mode":"immediate","transition":{"duration":300}}],"label":"2","method":"animate"},{"args":[[3],{"frame":{"duration":300,"redraw":false},"mode":"immediate","transition":{"duration":300}}],"label":"3","method":"animate"},{"args":[[4],{"frame":{"duration":300,"redraw":false},"mode":"immediate","transition":{"duration":300}}],"label":"4","method":"animate"},{"args":[[5],{"frame":{"duration":300,"redraw":false},"mode":"immediate","transition":{"duration":300}}],"label":"5","method":"animate"},{"args":[[6],{"frame":{"duration":300,"redraw":false},"mode":"immediate","transition":{"duration":300}}],"label":"6","method":"animate"},{"args":[[7],{"frame":{"duration":300,"redraw":false},"mode":"immediate","transition":{"duration":300}}],"label":"7","method":"animate"}],"transition":{"duration":300,"easing":"cubic-in-out"},"x":0.1,"xanchor":"left","y":0,"yanchor":"top"}]},                        {"responsive": true}                    ).then(function(){
+                            Plotly.addFrames('082e36e0-8b99-4b04-81b5-a607cd1f90f5', [{"data":[{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#FF3300","#FF3300","#FF3300","#FF3300","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,1,1,1,0,0,0]},"mode":"markers+lines","name":"Packet 1","showlegend":false,"text":["No Interaction","Line Interaction","Line Interaction","Line Interaction","Line Interaction","No Interaction","No Interaction","No Interaction"],"x":[11000.000000000002,11269.016616640021,11096.775602938753,11096.966360578102,11091.09207130687,10904.73005518225,10904.73005518225,10904.73005518225],"y":[0.0,173.93300326322492,391.4891952289794,402.7302084811953,967.504824106094,1444.5976684201585,1444.5976684201585,1444.5976684201585],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 2","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[10461.62167924669,16029.62021867329,16029.62021867329,16029.62021867329,16029.62021867329,16029.62021867329,16029.62021867329,16029.62021867329],"y":[3399.186938124422,11960.40449337315,11960.40449337315,11960.40449337315,11960.40449337315,11960.40449337315,11960.40449337315,11960.40449337315],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","#3366FF","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,1,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 3","showlegend":false,"text":["No Interaction","e-Scattering","e-Scattering","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[8899.186938124423,8679.102460064958,7438.223034288072,6603.8943139506455,6603.8943139506455,6603.8943139506455,6603.8943139506455,6603.8943139506455],"y":[6465.637775217205,7392.500185674034,9027.27263679088,8797.077917704852,8797.077917704852,8797.077917704852,8797.077917704852,8797.077917704852],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 4","showlegend":false,"text":["No Interaction","e-Scattering","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[6465.637775217205,6426.430708887942,6298.939245784077,6298.939245784077,6298.939245784077,6298.939245784077,6298.939245784077,6298.939245784077],"y":[8899.186938124423,9157.335910089561,9017.94679391718,9017.94679391718,9017.94679391718,9017.94679391718,9017.94679391718,9017.94679391718],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 5","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[3399.1869381244223,1128.0268702014869,1128.0268702014869,1128.0268702014869,1128.0268702014869,1128.0268702014869,1128.0268702014869,1128.0268702014869],"y":[10461.62167924669,19968.16354550672,19968.16354550672,19968.16354550672,19968.16354550672,19968.16354550672,19968.16354550672,19968.16354550672],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 6","showlegend":false,"text":["No Interaction","e-Scattering","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[6.735557395310444e-13,-15.72442943694869,-10727.600692817054,-10727.600692817054,-10727.600692817054,-10727.600692817054,-10727.600692817054,-10727.600692817054],"y":[11000.000000000002,11031.629190935751,16879.53149158682,16879.53149158682,16879.53149158682,16879.53149158682,16879.53149158682,16879.53149158682],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 7","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-3399.186938124421,-14285.203182736017,-14285.203182736017,-14285.203182736017,-14285.203182736017,-14285.203182736017,-14285.203182736017,-14285.203182736017],"y":[10461.621679246691,13997.605867717124,13997.605867717124,13997.605867717124,13997.605867717124,13997.605867717124,13997.605867717124,13997.605867717124],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 8","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-6465.637775217204,-13444.083244886437,-13444.083244886437,-13444.083244886437,-13444.083244886437,-13444.083244886437,-13444.083244886437,-13444.083244886437],"y":[8899.186938124423,14807.316627416456,14807.316627416456,14807.316627416456,14807.316627416456,14807.316627416456,14807.316627416456,14807.316627416456],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 9","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-8899.186938124421,-19036.198908386436,-19036.198908386436,-19036.198908386436,-19036.198908386436,-19036.198908386436,-19036.198908386436,-19036.198908386436],"y":[6465.637775217206,6133.769731604464,6133.769731604464,6133.769731604464,6133.769731604464,6133.769731604464,6133.769731604464,6133.769731604464],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#FF3300","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 10","showlegend":false,"text":["No Interaction","Line Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-10461.62167924669,-11311.463345121349,-10991.81867211787,-10991.81867211787,-10991.81867211787,-10991.81867211787,-10991.81867211787,-10991.81867211787],"y":[3399.186938124423,3507.5046501357206,424.17246407680506,424.17246407680506,424.17246407680506,424.17246407680506,424.17246407680506,424.17246407680506],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","#FF3300","#FF3300","#FF3300","#FF3300","#FF3300","darkslategrey"],"opacity":[0,1,1,1,1,1,1,0]},"mode":"markers+lines","name":"Packet 11","showlegend":false,"text":["No Interaction","e-Scattering","Line Interaction","Line Interaction","Line Interaction","Line Interaction","Line Interaction","No Interaction"],"x":[-11000.000000000002,-13152.15774253363,-11715.796018946668,-13862.228426493159,-13837.597668844859,-13634.348387808042,-11990.334312272596,-4279.570443210387],"y":[1.3471114790620889e-12,-2964.903948910639,-3872.741713095448,-6255.277571147606,-6674.1084590484525,-7569.261020356157,-13320.751685329498,-19536.767307351547],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","#3366FF","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,1,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 12","showlegend":false,"text":["No Interaction","e-Scattering","e-Scattering","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-10461.621679246691,-10706.738835151042,-9324.293931765818,-1099.5748438555877,-1099.5748438555877,-1099.5748438555877,-1099.5748438555877,-1099.5748438555877],"y":[-3399.1869381244205,-4910.3910816270145,-8822.42475909818,-19969.75050326769,-19969.75050326769,-19969.75050326769,-19969.75050326769,-19969.75050326769],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","#FF3300","#3366FF","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,1,1,0,0,0,0]},"mode":"markers+lines","name":"Packet 13","showlegend":false,"text":["No Interaction","e-Scattering","Line Interaction","e-Scattering","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-8899.186938124425,-8853.272579451035,-8864.192425644635,-8267.627119630628,-7623.465877144973,-7623.465877144973,-7623.465877144973,-7623.465877144973],"y":[-6465.637775217204,-6746.438508123706,-6793.44702337376,-7413.032652965026,-7929.865573892547,-7929.865573892547,-7929.865573892547,-7929.865573892547],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#FF3300","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 14","showlegend":false,"text":["No Interaction","Line Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-6465.637775217206,-6432.424452457651,-6119.634962986705,-6119.634962986705,-6119.634962986705,-6119.634962986705,-6119.634962986705,-6119.634962986705],"y":[-8899.186938124421,-9237.325670431555,-9140.57262537696,-9140.57262537696,-9140.57262537696,-9140.57262537696,-9140.57262537696,-9140.57262537696],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 15","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-3399.1869381244232,-558.1623578647619,-558.1623578647619,-558.1623578647619,-558.1623578647619,-558.1623578647619,-558.1623578647619,-558.1623578647619],"y":[-10461.62167924669,-19992.20985239658,-19992.20985239658,-19992.20985239658,-19992.20985239658,-19992.20985239658,-19992.20985239658,-19992.20985239658],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#3366FF","#FF3300","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,1,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 16","showlegend":false,"text":["No Interaction","e-Scattering","Line Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[-2.020667218593133e-12,1289.3398088252777,2685.0831402302615,6378.507371185572,6378.507371185572,6378.507371185572,6378.507371185572,6378.507371185572],"y":[-11000.000000000002,-11220.624496398368,-12025.195877116294,-18955.59663307202,-18955.59663307202,-18955.59663307202,-18955.59663307202,-18955.59663307202],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 17","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[3399.18693812442,7531.117015249097,7531.117015249097,7531.117015249097,7531.117015249097,7531.117015249097,7531.117015249097,7531.117015249097],"y":[-10461.621679246691,-18527.87835945135,-18527.87835945135,-18527.87835945135,-18527.87835945135,-18527.87835945135,-18527.87835945135,-18527.87835945135],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 18","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[6465.637775217202,14694.622131172458,14694.622131172458,14694.622131172458,14694.622131172458,14694.622131172458,14694.622131172458,14694.622131172458],"y":[-8899.186938124425,-13567.169211816321,-13567.169211816321,-13567.169211816321,-13567.169211816321,-13567.169211816321,-13567.169211816321,-13567.169211816321],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,0,0,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 19","showlegend":false,"text":["No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[8899.186938124421,19747.933640952837,19747.933640952837,19747.933640952837,19747.933640952837,19747.933640952837,19747.933640952837,19747.933640952837],"y":[-6465.6377752172075,-3165.2988662247103,-3165.2988662247103,-3165.2988662247103,-3165.2988662247103,-3165.2988662247103,-3165.2988662247103,-3165.2988662247103],"type":"scatter"},{"hovertemplate":"\u003cb\u003eX\u003c\u002fb\u003e: %{x}\u003cbr\u003e\u003cb\u003eY\u003c\u002fb\u003e: %{y}\u003cbr\u003e\u003cb\u003eLast Interaction: %{text}\u003c\u002fb\u003e","line":{"color":"darkslategrey"},"marker":{"color":["darkslategrey","#FF3300","#3366FF","darkslategrey","darkslategrey","darkslategrey","darkslategrey","darkslategrey"],"opacity":[0,1,1,0,0,0,0,0]},"mode":"markers+lines","name":"Packet 20","showlegend":false,"text":["No Interaction","Line Interaction","e-Scattering","No Interaction","No Interaction","No Interaction","No Interaction","No Interaction"],"x":[10461.62167924669,11373.86146794324,11978.217687904193,16714.38774233118,16714.38774233118,16714.38774233118,16714.38774233118,16714.38774233118],"y":[-3399.1869381244237,-2800.413496307708,651.4481949339583,10983.13445237785,10983.13445237785,10983.13445237785,10983.13445237785,10983.13445237785],"type":"scatter"}],"name":"8"}]);
+                        }).then(function(){
+
+var gd = document.getElementById('082e36e0-8b99-4b04-81b5-a607cd1f90f5');
+var x = new MutationObserver(function (mutations, observer) {{
+        var display = window.getComputedStyle(gd).display;
+        if (!display || display === 'none') {{
+            console.log([gd, 'removed!']);
+            Plotly.purge(gd);
+            observer.disconnect();
+        }}
+}});
+
+// Listen for the removal of the full notebook cells
+var notebookContainer = gd.closest('#notebook-container');
+if (notebookContainer) {{
+    x.observe(notebookContainer, {childList: true});
+}}
+
+// Listen for the clearing of the current output cell
+var outputEl = gd.closest('.output');
+if (outputEl) {{
+    x.observe(outputEl, {childList: true});
+}}
+
+                        })                };                });            </script>        </div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
+      <span class="lastupdated">Last updated on 11 Mar 2025.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
