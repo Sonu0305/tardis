@@ -135,7 +135,7 @@
 import numpy as np
 import pandas as pd
 from astropy import units as u
-from numpy import recfromtxt
+from numpy import genfromtxt
 from radioactivedecay import Nuclide
 from radioactivedecay.utils import Z_DICT, elem_to_Z
 
@@ -181,11 +181,12 @@ def read_simple_ascii_density(
         time_of_model_string = fh.readline().strip()
         time_of_model = parse_quantity(time_of_model_string)
 
-    data = recfromtxt(
+    data = genfromtxt(
         fname,
         skip_header=1,
         names=(&quot;index&quot;, &quot;velocity&quot;, &quot;density&quot;),
-        dtype=(int, float, float),
+        dtype=[(&#39;index&#39;, &#39;i8&#39;), (&#39;velocity&#39;, &#39;f8&#39;), (&#39;density&#39;, &#39;f8&#39;)], 
+        encoding=&#39;utf-8&#39;,
     )
     velocity = (data[&quot;velocity&quot;] * u.km / u.s).to(&quot;cm/s&quot;)
     mean_density = (data[&quot;density&quot;] * u.Unit(&quot;g/cm^3&quot;))[1:]
@@ -310,7 +311,7 @@ def read_uniform_mass_fractions(mass_fractions_section, no_of_shells):
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 05 Mar 2025.
+      <span class="lastupdated">Last updated on 11 Mar 2025.
       </span></p>
   </div>
 
