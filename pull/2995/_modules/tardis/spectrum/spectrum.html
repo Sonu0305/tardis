@@ -295,18 +295,26 @@ class TARDISSpectrum(HDFWriterMixin):
             warnings.warn(f&quot;Did not find plotting mode {mode}, doing nothing.&quot;)</div>
 
 
-<div class="viewcode-block" id="TARDISSpectrum.from_hdf_to_class">
-<a class="viewcode-back" href="../../../api/tardis.spectrum.spectrum.html#tardis.spectrum.spectrum.TARDISSpectrum.from_hdf_to_class">[docs]</a>
-    def from_hdf_to_class(self,hdf_path):
+<div class="viewcode-block" id="TARDISSpectrum.from_hdf">
+<a class="viewcode-back" href="../../../api/tardis.spectrum.spectrum.html#tardis.spectrum.spectrum.TARDISSpectrum.from_hdf">[docs]</a>
+    def from_hdf(self,hdf_path):
+        &quot;&quot;&quot;
+        Retrieves the class object from the hdf path provided. 
+
+        Parameters
+        ----------
+        hdf_path : string, Path to the hdf file 
+        &quot;&quot;&quot;
         try:
             with pd.HDFStore(hdf_path, mode=&quot;r&quot;) as store:
-                _freq = store[&#39;/tardis_spectrum/_frequency&#39;]
-                _f = np.array(_freq) * u.Hz
+                freq_store = store[&#39;/tardis_spectrum/_frequency&#39;]
+                frequency_arr = np.array(freq_store) * u.Hz
 
-                _lumi = store[&#39;/tardis_spectrum/luminosity&#39;]
-                _l = np.array(_lumi) * (u.erg/u.s)
+                luminosity_store = store[&#39;/tardis_spectrum/luminosity&#39;]
+                luminosity_arr = np.array(luminosity_store) * (u.erg/u.s)
 
-                return TARDISSpectrum(_f, _l)
+                final_obj = TARDISSpectrum(frequency_arr, luminosity_arr)
+                return final_obj
             
         except FileNotFoundError as e:
             print(f&quot;File not found: {e}&quot;)</div>
@@ -345,7 +353,7 @@ class TARDISSpectrum(HDFWriterMixin):
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 26 Feb 2025.
+      <span class="lastupdated">Last updated on 12 Mar 2025.
       </span></p>
   </div>
 
