@@ -79,6 +79,7 @@
 <p class="caption" role="heading"><span class="caption-text">Analysing Tardis Outputs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../analysing_tardis_outputs/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../analysing_tardis_outputs/spectrum/index.html">Analyzing TARDIS Spectra</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Physics Walkthrough</span></p>
 <ul>
@@ -157,8 +158,14 @@ logger = logging.getLogger(__name__)
 class InnerVelocitySolverWorkflow(SimpleTARDISWorkflow):
     TAU_TARGET = np.log(2.0 / 3.0)
 
-    def __init__(self, configuration, mean_optical_depth=&quot;rosseland&quot;, tau=None):
-        super().__init__(configuration)
+    def __init__(
+        self,
+        configuration,
+        mean_optical_depth=&quot;rosseland&quot;,
+        tau=None,
+        csvy=False,
+    ):
+        super().__init__(configuration, csvy)
         self.mean_optical_depth = mean_optical_depth.lower()
 
         self.convergence_solvers[&quot;v_inner_boundary&quot;] = ConvergenceSolver(
@@ -198,7 +205,7 @@ class InnerVelocitySolverWorkflow(SimpleTARDISWorkflow):
         )
 
         interpolator = interp1d(
-            tau_integ[self.simulation_state.geometry.v_inner_boundary_index:],
+            tau_integ[self.simulation_state.geometry.v_inner_boundary_index :],
             self.simulation_state.geometry.v_inner_active,  # Only use the active values as we only need a numerical estimate, not an index
             fill_value=&quot;extrapolate&quot;,
         )
@@ -231,13 +238,8 @@ class InnerVelocitySolverWorkflow(SimpleTARDISWorkflow):
 
 <div class="viewcode-block" id="InnerVelocitySolverWorkflow.get_convergence_estimates">
 <a class="viewcode-back" href="../../../api/tardis.workflows.v_inner_solver.html#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.get_convergence_estimates">[docs]</a>
-    def get_convergence_estimates(self, transport_state):
+    def get_convergence_estimates(self):
         &quot;&quot;&quot;Compute convergence estimates from the transport state
-
-        Parameters
-        ----------
-        transport_state : MonteCarloTransportState
-            Transport state object to compute estimates
 
         Returns
         -------
@@ -246,7 +248,7 @@ class InnerVelocitySolverWorkflow(SimpleTARDISWorkflow):
         EstimatedRadiationFieldProperties
             Dilute radiation file and j_blues dataclass
         &quot;&quot;&quot;
-        estimates = super().get_convergence_estimates(transport_state)
+        estimates = super().get_convergence_estimates()
 
         estimated_v_inner = self.estimate_v_inner()
 
@@ -475,14 +477,14 @@ class InnerVelocitySolverWorkflow(SimpleTARDISWorkflow):
             # Note that we are updating the class attribute here to ensure consistency
             self.opacity_states = self.solve_opacity()
 
-            transport_state, virtual_packet_energies = self.solve_montecarlo(
+            virtual_packet_energies = self.solve_montecarlo(
                 self.opacity_states, self.real_packet_count
             )
 
             (
                 estimated_values,
                 estimated_radfield_properties,
-            ) = self.get_convergence_estimates(transport_state)
+            ) = self.get_convergence_estimates()
 
             self.solve_simulation_state(estimated_values)
 
@@ -505,13 +507,12 @@ class InnerVelocitySolverWorkflow(SimpleTARDISWorkflow):
                 &quot;\n\tITERATIONS HAVE NOT CONVERGED, starting final iteration&quot;
             )
         self.opacity_states = self.solve_opacity()
-        transport_state, virtual_packet_energies = self.solve_montecarlo(
+        virtual_packet_energies = self.solve_montecarlo(
             self.opacity_states,
             self.final_iteration_packet_count,
             self.virtual_packet_count,
         )
         self.initialize_spectrum_solver(
-            transport_state,
             self.opacity_states,
             virtual_packet_energies,
         )</div>
@@ -527,7 +528,7 @@ class InnerVelocitySolverWorkflow(SimpleTARDISWorkflow):
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 11 Mar 2025.
+      <span class="lastupdated">Last updated on 19 Mar 2025.
       </span></p>
   </div>
 
