@@ -104,6 +104,7 @@
 <p class="caption" role="heading"><span class="caption-text">Analysing Tardis Outputs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../analysing_tardis_outputs/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysing_tardis_outputs/spectrum/index.html">Analyzing TARDIS Spectra</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Physics Walkthrough</span></p>
 <ul>
@@ -163,6 +164,17 @@
 <dt class="sig sig-object py" id="tardis.workflows.standard_tardis_workflow.StandardTARDISWorkflow">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tardis.workflows.standard_tardis_workflow.</span></span><span class="sig-name descname"><span class="pre">StandardTARDISWorkflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/standard_tardis_workflow.html#StandardTARDISWorkflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.standard_tardis_workflow.StandardTARDISWorkflow" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.workflows.simple_tardis_workflow.html#tardis.workflows.simple_tardis_workflow.SimpleTARDISWorkflow" title="tardis.workflows.simple_tardis_workflow.SimpleTARDISWorkflow"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleTARDISWorkflow</span></code></a>, <a class="reference internal" href="tardis.simulation.base.html#tardis.simulation.base.PlasmaStateStorerMixin" title="tardis.simulation.base.PlasmaStateStorerMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">PlasmaStateStorerMixin</span></code></a>, <a class="reference internal" href="tardis.io.util.html#tardis.io.util.HDFWriterMixin" title="tardis.io.util.HDFWriterMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">HDFWriterMixin</span></code></a></p>
+<p>A simple TARDIS workflow that runs a simulation to convergence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>configuration</strong><span class="classifier">Configuration</span></dt><dd><p>Configuration object for the simulation</p>
+</dd>
+<dt><strong>csvy</strong><span class="classifier">bool, optional</span></dt><dd><p>Set true if the configuration uses CSVY, by default False</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="tardis.workflows.standard_tardis_workflow.StandardTARDISWorkflow.convergence_plots">
 <span class="sig-name descname"><span class="pre">convergence_plots</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#tardis.workflows.standard_tardis_workflow.StandardTARDISWorkflow.convergence_plots" title="Link to this definition">¶</a></dt>
@@ -175,17 +187,11 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tardis.workflows.standard_tardis_workflow.StandardTARDISWorkflow.get_convergence_estimates">
-<span class="sig-name descname"><span class="pre">get_convergence_estimates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transport_state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/standard_tardis_workflow.html#StandardTARDISWorkflow.get_convergence_estimates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.standard_tardis_workflow.StandardTARDISWorkflow.get_convergence_estimates" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_convergence_estimates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/standard_tardis_workflow.html#StandardTARDISWorkflow.get_convergence_estimates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.standard_tardis_workflow.StandardTARDISWorkflow.get_convergence_estimates" title="Link to this definition">¶</a></dt>
 <dd><p>Compute convergence estimates from the transport state</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>transport_state</strong><span class="classifier">MonteCarloTransportState</span></dt><dd><p>Transport state object to compute estimates</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
 <dt>dict</dt><dd><p>Convergence estimates</p>
 </dd>
 <dt>EstimatedRadiationFieldProperties</dt><dd><p>Dilute radiation file and j_blues dataclass</p>
@@ -260,7 +266,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 13 Mar 2025.
+      <span class="lastupdated">Last updated on 24 Mar 2025.
       </span></p>
   </div>
 

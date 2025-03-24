@@ -76,6 +76,7 @@
 <p class="caption" role="heading"><span class="caption-text">Analysing Tardis Outputs</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../analysing_tardis_outputs/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../analysing_tardis_outputs/spectrum/index.html">Analyzing TARDIS Spectra</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Physics Walkthrough</span></p>
 <ul>
@@ -286,7 +287,7 @@ class MonteCarloTransportSolver(HDFWriterMixin):
         transport_state,
         iteration=0,
         total_iterations=0,
-        show_progress_bars=True,
+        show_progress_bars=False,
     ):
         &quot;&quot;&quot;
         Run the montecarlo calculation
@@ -481,7 +482,7 @@ class MonteCarloTransportSolver(HDFWriterMixin):
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 13 Mar 2025.
+      <span class="lastupdated">Last updated on 24 Mar 2025.
       </span></p>
   </div>
 
