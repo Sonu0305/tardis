@@ -215,31 +215,6 @@ expanded to include the decay energy for each gamma-X ray transition.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_escape_energy">
-<span class="sig-name descname"><span class="pre">get_escape_energy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/tardis_he_workflow.html#TARDISHEWorkflow.get_escape_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_escape_energy" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_escape_energy_cosi">
-<span class="sig-name descname"><span class="pre">get_escape_energy_cosi</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/tardis_he_workflow.html#TARDISHEWorkflow.get_escape_energy_cosi"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_escape_energy_cosi" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_gamma_ray_deposited_energy">
-<span class="sig-name descname"><span class="pre">get_gamma_ray_deposited_energy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/tardis_he_workflow.html#TARDISHEWorkflow.get_gamma_ray_deposited_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_gamma_ray_deposited_energy" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_packets_escaped">
-<span class="sig-name descname"><span class="pre">get_packets_escaped</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/tardis_he_workflow.html#TARDISHEWorkflow.get_packets_escaped"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_packets_escaped" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_positron_energy">
-<span class="sig-name descname"><span class="pre">get_positron_energy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/tardis_he_workflow.html#TARDISHEWorkflow.get_positron_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_positron_energy" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_times">
 <span class="sig-name descname"><span class="pre">get_times</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_end</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_space</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_steps</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/tardis_he_workflow.html#TARDISHEWorkflow.get_times"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_times" title="Link to this definition">¶</a></dt>
 <dd><p>Create an array of times between t_start and t_end.</p>
@@ -250,7 +225,9 @@ expanded to include the decay energy for each gamma-X ray transition.</p>
 </dd>
 <dt><strong>time_end</strong><span class="classifier">float</span></dt><dd><p>The end time in days.</p>
 </dd>
-<dt><strong>number_of_steps</strong><span class="classifier">int</span></dt><dd><p>The number of time steps to take between t_start and t_end.</p>
+<dt><strong>time_space</strong><span class="classifier">string</span></dt><dd><p>The time spacing between time steps (‘linear’ or ‘log’).</p>
+</dd>
+<dt><strong>time_steps</strong><span class="classifier">int</span></dt><dd><p>The number of time steps to take between t_start and t_end.</p>
 </dd>
 </dl>
 </dd>
@@ -262,11 +239,6 @@ expanded to include the decay energy for each gamma-X ray transition.</p>
 </dd>
 </dl>
 </dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_total_deposited_energy">
-<span class="sig-name descname"><span class="pre">get_total_deposited_energy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/tardis_he_workflow.html#TARDISHEWorkflow.get_total_deposited_energy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_total_deposited_energy" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.run">
@@ -289,7 +261,7 @@ expanded to include the decay energy for each gamma-X ray transition.</p>
 </dd>
 <dt><strong>seed</strong><span class="classifier">int</span></dt><dd><p>The random seed for the simulation.</p>
 </dd>
-<dt><strong>fp</strong><span class="classifier">str</span></dt><dd><p>Positronium fraction</p>
+<dt><strong>fp</strong><span class="classifier">float</span></dt><dd><p>Positronium fraction</p>
 </dd>
 <dt><strong>spectrum_bins</strong><span class="classifier">int</span></dt><dd><p>The number of bins in the spectrum.</p>
 </dd>
@@ -338,7 +310,7 @@ each shell for all time steps between t_start and t_end.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 27 Feb 2025.
+      <span class="lastupdated">Last updated on 24 Mar 2025.
       </span></p>
   </div>
 

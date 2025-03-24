@@ -263,9 +263,11 @@ class TARDISHEWorkflow:
             The start time in days.
         time_end : float
             The end time in days.
-        number_of_steps : int
+        time_space : string
+            The time spacing between time steps (&#39;linear&#39; or &#39;log&#39;).
+        time_steps : int
             The number of time steps to take between t_start and t_end.
-        
+            
         Returns
         -------
         times : array
@@ -297,7 +299,7 @@ class TARDISHEWorkflow:
             The time spacing between time steps.
         seed : int
             The random seed for the simulation.
-        fp : str
+        fp : float
             Positronium fraction
         spectrum_bins : int
             The number of bins in the spectrum.
@@ -316,52 +318,8 @@ class TARDISHEWorkflow:
         ) = run_gamma_ray_loop(self.simulation_state, decay_isotopes, decay_over_time,
                                   number_of_packets, times, effective_times, seed, fp,
                                   spectrum_bins, grey_opacity)</div>
-
-        
-
-<div class="viewcode-block" id="TARDISHEWorkflow.get_escape_energy">
-<a class="viewcode-back" href="../../../api/tardis.workflows.tardis_he_workflow.html#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_escape_energy">[docs]</a>
-    def get_escape_energy(self):
-
-        return self.escape_energy</div>
-
-    
-<div class="viewcode-block" id="TARDISHEWorkflow.get_escape_energy_cosi">
-<a class="viewcode-back" href="../../../api/tardis.workflows.tardis_he_workflow.html#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_escape_energy_cosi">[docs]</a>
-    def get_escape_energy_cosi(self):
-
-        return self.escape_energy_cosi</div>
-
-    
-<div class="viewcode-block" id="TARDISHEWorkflow.get_packets_escaped">
-<a class="viewcode-back" href="../../../api/tardis.workflows.tardis_he_workflow.html#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_packets_escaped">[docs]</a>
-    def get_packets_escaped(self):
-        
-        return self.packets_escaped</div>
-
-    
-<div class="viewcode-block" id="TARDISHEWorkflow.get_gamma_ray_deposited_energy">
-<a class="viewcode-back" href="../../../api/tardis.workflows.tardis_he_workflow.html#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_gamma_ray_deposited_energy">[docs]</a>
-    def get_gamma_ray_deposited_energy(self):
-
-        return self.gamma_ray_deposited_energy</div>
-
-    
-<div class="viewcode-block" id="TARDISHEWorkflow.get_total_deposited_energy">
-<a class="viewcode-back" href="../../../api/tardis.workflows.tardis_he_workflow.html#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_total_deposited_energy">[docs]</a>
-    def get_total_deposited_energy(self):
-
-        return self.total_deposited_energy</div>
-
-    
-<div class="viewcode-block" id="TARDISHEWorkflow.get_positron_energy">
-<a class="viewcode-back" href="../../../api/tardis.workflows.tardis_he_workflow.html#tardis.workflows.tardis_he_workflow.TARDISHEWorkflow.get_positron_energy">[docs]</a>
-    def get_positron_energy(self):
-
-        return self.positron_energy</div>
 </div>
 
-    
 </pre></div>
 
            </div>
@@ -372,7 +330,7 @@ class TARDISHEWorkflow:
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 27 Feb 2025.
+      <span class="lastupdated">Last updated on 24 Mar 2025.
       </span></p>
   </div>
 
