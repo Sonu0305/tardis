@@ -88,7 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="physics/montecarlo/index.html">Monte Carlo Iteration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="physics/update_and_conv/update_and_conv.html">Updating Plasma and Convergence</a></li>
 <li class="toctree-l1"><a class="reference internal" href="physics/spectrum/index.html">Spectrum Generation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="physics/tardisgamma/index.html">TARDIS-HE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="physics/tardisgamma/index.html">TARDIS-High Energy</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Contributing to TARDIS</span></p>
 <ul>
@@ -562,10 +562,6 @@
 </li>
       <li><a href="api/tardis.energy_input.gamma_ray_transport.html#tardis.energy_input.gamma_ray_transport.calculate_total_decays_old">calculate_total_decays_old() (in module tardis.energy_input.gamma_ray_transport)</a>
 </li>
-      <li><a href="api/tardis.opacities.macro_atom.base.html#tardis.opacities.macro_atom.base.calculate_transition_probabilities">calculate_transition_probabilities() (in module tardis.opacities.macro_atom.base)</a>
-</li>
-      <li><a href="api/tardis.opacities.macro_atom.base.html#tardis.opacities.macro_atom.base.calculate_transition_probability">calculate_transition_probability() (in module tardis.opacities.macro_atom.base)</a>
-</li>
       <li><a href="api/tardis.plasma.equilibrium.rates.collision_strengths.html#tardis.plasma.equilibrium.rates.collision_strengths.calculate_upsilon_g_2_collisional_rates">calculate_upsilon_g_2_collisional_rates() (in module tardis.plasma.equilibrium.rates.collision_strengths)</a>
 </li>
       <li><a href="api/tardis.plasma.properties.ion_population.html#tardis.plasma.properties.ion_population.IonNumberDensity.calculate_with_n_electron">calculate_with_n_electron() (tardis.plasma.properties.ion_population.IonNumberDensity static method)</a>
@@ -578,10 +574,10 @@
 </li>
       <li><a href="api/tardis.visualization.widgets.util.html#tardis.visualization.widgets.util.Timer.cancel">cancel() (tardis.visualization.widgets.util.Timer method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/tardis.spectrum.formal_integral.html#tardis.spectrum.formal_integral.FormalIntegrator.check">check() (tardis.spectrum.formal_integral.FormalIntegrator method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/tardis.plasma.assembly.base.html#tardis.plasma.assembly.base.PlasmaSolverFactory.check_continuum_interaction_species">check_continuum_interaction_species() (tardis.plasma.assembly.base.PlasmaSolverFactory method)</a>
 </li>
       <li><a href="api/tardis.workflows.simple_tardis_workflow.html#tardis.workflows.simple_tardis_workflow.SimpleTARDISWorkflow.check_convergence">check_convergence() (tardis.workflows.simple_tardis_workflow.SimpleTARDISWorkflow method)</a>
@@ -2989,10 +2985,10 @@
 </li>
       <li><a href="api/tardis.io.model.readers.cmfgen.html#tardis.io.model.readers.cmfgen.read_cmfgen_model">read_cmfgen_model() (in module tardis.io.model.readers.cmfgen)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/tardis.io.model.readers.generic_readers.html#tardis.io.model.readers.generic_readers.read_csv_composition">read_csv_composition() (in module tardis.io.model.readers.generic_readers)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="api/tardis.io.model.readers.util.html#tardis.io.model.readers.util.read_csv_isotope_mass_fractions">read_csv_isotope_mass_fractions() (in module tardis.io.model.readers.util)</a>
 </li>
       <li><a href="api/tardis.visualization.widgets.custom_abundance.html#tardis.visualization.widgets.custom_abundance.DensityEditor.read_density">read_density() (tardis.visualization.widgets.custom_abundance.DensityEditor method)</a>
@@ -3026,6 +3022,8 @@
       <li><a href="api/tardis.visualization.widgets.grotrian.html#tardis.visualization.widgets.grotrian.GrotrianPlot.reset_selected_plot_wavelength_range">reset_selected_plot_wavelength_range() (tardis.visualization.widgets.grotrian.GrotrianPlot method)</a>
 </li>
       <li><a href="api/tardis.simulation.base.html#tardis.simulation.base.PlasmaStateStorerMixin.reshape_plasma_state_store">reshape_plasma_state_store() (tardis.simulation.base.PlasmaStateStorerMixin method)</a>
+</li>
+      <li><a href="api/tardis.workflows.v_inner_solver.html#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.reshape_store_plasma_state">reshape_store_plasma_state() (tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow method)</a>
 </li>
       <li><a href="api/tardis.io.atom_data.util.html#tardis.io.atom_data.util.resolve_atom_data_fname">resolve_atom_data_fname() (in module tardis.io.atom_data.util)</a>
 </li>
@@ -3288,7 +3286,11 @@
       <li><a href="api/tardis.plasma.properties.radiative_properties.html#tardis.plasma.properties.radiative_properties.StimulatedEmissionFactor">StimulatedEmissionFactor (class in tardis.plasma.properties.radiative_properties)</a>
 </li>
       <li><a href="api/tardis.simulation.base.html#tardis.simulation.base.PlasmaStateStorerMixin.store_plasma_state">store_plasma_state() (tardis.simulation.base.PlasmaStateStorerMixin method)</a>
+
+      <ul>
+        <li><a href="api/tardis.workflows.v_inner_solver.html#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.store_plasma_state">(tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow method)</a>
 </li>
+      </ul></li>
       <li><a href="api/tardis.plasma.base.html#tardis.plasma.base.BasePlasma.store_previous_properties">store_previous_properties() (tardis.plasma.base.BasePlasma method)</a>
 </li>
       <li><a href="resources/zreferences.html#term-Synapps"><strong>Synapps</strong></a>
@@ -4980,7 +4982,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 14 Mar 2025.
+      <span class="lastupdated">Last updated on 25 Mar 2025.
       </span></p>
   </div>
 
