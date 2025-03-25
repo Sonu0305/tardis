@@ -287,7 +287,7 @@
 <p>Now we will plot the spectrum using matplotlib and plotly. The plots show the luminosity density as a function of wavelength.</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\textbf{Wavelength } [\overset{\circ}{A}]\)</span>: The x-axis represents the wavelength in Angstroms.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\textbf{Luminosity density} [ergs^{-1}\overset{\circ}{A^{-1}}]\)</span>: The y-axis represents the luminosity density in erg per second per Angstrom.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\textbf{Luminosity density} [erg\;s^{-1}\;\overset{\circ}{A^{-1}}]\)</span>: The y-axis represents the luminosity density in erg per second per Angstrom.</p></li>
 </ul>
 <section id="Matplotlib">
 <h3>Matplotlib<a class="headerlink" href="#Matplotlib" title="Link to this heading">¶</a></h3>
@@ -307,7 +307,7 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">9000</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;TARDIS example model spectrum&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Wavelength [$\AA$]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Luminosity density [$ergs^{-1}\AA^{-1}$]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Luminosity density [$erg\;s^{-1}\;\AA^{-1}$]&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <br/></pre></div>
@@ -340,7 +340,7 @@
 <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;TARDIS example model spectrum&quot;</span><span class="p">,</span>
     <span class="n">xaxis_title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$ \text{Wavelength } [\overset{\circ}</span><span class="si">{A}</span><span class="s2">]$&quot;</span><span class="p">,</span>
-    <span class="n">yaxis_title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$ \text{Luminosity density } [ergs^{-1}\overset{\circ}{A^{-1}}]$&quot;</span><span class="p">,</span> <span class="c1"># Plotly doesnot support the Angstrom symbol so we are using a close approximation of it</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$ \text{Luminosity density } [erg\;s^{-1}\;\overset{\circ}{A^{-1}}]$&quot;</span><span class="p">,</span> <span class="c1"># Plotly doesnot support the Angstrom symbol so we are using a close approximation of it</span>
     <span class="n">xaxis_range</span><span class="o">=</span><span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="mi">9000</span><span class="p">],</span>
     <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">template</span><span class="o">=</span><span class="s2">&quot;plotly_white&quot;</span>
@@ -375,7 +375,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 12 Mar 2025.
+      <span class="lastupdated">Last updated on 25 Mar 2025.
       </span></p>
   </div>
 
