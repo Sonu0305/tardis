@@ -104,8 +104,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../io/configuration/index.html">Configuration (Required Input)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../io/model/index.html">Reading Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../io/optional/index.html">Optional Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../io/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../io/output/index.html">Additional Outputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Analysing Tardis Outputs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../analysing_tardis_outputs/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../analysing_tardis_outputs/spectrum/index.html">Analyzing TARDIS Spectra</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Physics Walkthrough</span></p>
 <ul>
@@ -217,6 +221,27 @@ for Compton Scattering</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt>astropy Quantity</dt><dd><p>Half-life in seconds</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tardis.energy_input.util.doppler_factor_3D_all_packets">
+<span class="sig-prename descclassname"><span class="pre">tardis.energy_input.util.</span></span><span class="sig-name descname"><span class="pre">doppler_factor_3D_all_packets</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction_vectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">position_vectors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">times</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/energy_input/util.html#doppler_factor_3D_all_packets"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.energy_input.util.doppler_factor_3D_all_packets" title="Link to this definition">¶</a></dt>
+<dd><p>Doppler shift for photons in 3D</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>direction_vectors</strong><span class="classifier">array</span></dt><dd></dd>
+<dt><strong>position_vectors</strong><span class="classifier">array</span></dt><dd></dd>
+<dt><strong>times</strong><span class="classifier">array</span></dt><dd></dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>array</dt><dd><p>Doppler factors</p>
 </dd>
 </dl>
 </dd>
@@ -382,6 +407,30 @@ ight)</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="tardis.energy_input.util.make_isotope_string_tardis_like">
+<span class="sig-prename descclassname"><span class="pre">tardis.energy_input.util.</span></span><span class="sig-name descname"><span class="pre">make_isotope_string_tardis_like</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">isotope_dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/energy_input/util.html#make_isotope_string_tardis_like"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.energy_input.util.make_isotope_string_tardis_like" title="Link to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Converts isotope string to TARDIS format</dt><dd><p>Ni-56 -&gt; Ni56, Co-56 -&gt; Co56</p>
+</dd>
+</dl>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h2>
+<dl class="simple">
+<dt>isotope<span class="classifier">str</span></dt><dd><p>Isotope string</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>str</dt><dd><p>TARDIS-like isotope string</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="tardis.energy_input.util.normalize_vector">
 <span class="sig-prename descclassname"><span class="pre">tardis.energy_input.util.</span></span><span class="sig-name descname"><span class="pre">normalize_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/energy_input/util.html#normalize_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.energy_input.util.normalize_vector" title="Link to this definition">¶</a></dt>
 <dd><p>Normalizes a vector in Cartesian coordinates</p>
@@ -482,7 +531,7 @@ ight)</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 24 Feb 2025.
+      <span class="lastupdated">Last updated on 26 Mar 2025.
       </span></p>
   </div>
 

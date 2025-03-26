@@ -74,8 +74,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../../io/configuration/index.html">Configuration (Required Input)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../io/model/index.html">Reading Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../io/optional/index.html">Optional Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../../io/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../io/output/index.html">Additional Outputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Analysing Tardis Outputs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../analysing_tardis_outputs/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../analysing_tardis_outputs/spectrum/index.html">Analyzing TARDIS Spectra</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Physics Walkthrough</span></p>
 <ul>
@@ -127,7 +131,10 @@
            <div itemprop="articleBody">
              
   <h1>Source code for tardis.energy_input.samplers</h1><div class="highlight"><pre>
-<span></span>import numpy as np
+<span></span>import astropy.constants as const
+from scipy.interpolate import interp1d
+import astropy.units as u
+import numpy as np
 from numba import njit
 
 from tardis.transport.montecarlo import njit_dict_no_parallel
@@ -282,6 +289,64 @@ def sample_decay_time(
         )
     return decay_time</div>
 
+
+
+<div class="viewcode-block" id="PositroniumSampler">
+<a class="viewcode-back" href="../../../api/tardis.energy_input.samplers.html#tardis.energy_input.samplers.PositroniumSampler">[docs]</a>
+class PositroniumSampler:
+    def __init__(self, n_grid=10000):
+        &quot;&quot;&quot;
+        Parameters
+        ----------
+        n_grid : int, optional
+            Number of grid points for the CDF, by default 1000
+        &quot;&quot;&quot;
+        self.x_grid = np.linspace(1e-4, 0.9999, n_grid)
+        self.norm_pdf = self.pdf(self.x_grid) / np.trapz(self.pdf(self.x_grid), self.x_grid)
+        self.cdf_grid = np.cumsum(self.norm_pdf)
+        self.cdf_grid /= self.cdf_grid[-1]
+
+<div class="viewcode-block" id="PositroniumSampler.pdf">
+<a class="viewcode-back" href="../../../api/tardis.energy_input.samplers.html#tardis.energy_input.samplers.PositroniumSampler.pdf">[docs]</a>
+    @staticmethod
+    def pdf(x):
+        &quot;&quot;&quot;
+        Parameters
+        ----------
+        x : float
+            E / m_e c^2
+
+        Returns
+        -------
+        float
+            PDF of positronium energy from Ore amnd Powell (1949)
+        &quot;&quot;&quot;
+        first_term = x * (1 - x) / (2 - x) ** 2
+        second_term = 2 * (1 - x) ** 2 * np.log(1 - x) / (2 - x) ** 3
+        third_term = (2 - x) / x
+        fourth_term = 2 * (1 - x) * np.log(1 - x) / x**2
+
+        return 2 * (first_term - second_term + third_term + fourth_term)</div>
+
+    
+<div class="viewcode-block" id="PositroniumSampler.sample_energy">
+<a class="viewcode-back" href="../../../api/tardis.energy_input.samplers.html#tardis.energy_input.samplers.PositroniumSampler.sample_energy">[docs]</a>
+    def sample_energy(self, samples):
+        &quot;&quot;&quot;
+        Returns
+        -------
+        float
+            Sampled positronium energy
+        &quot;&quot;&quot;
+        inverse_cdf = interp1d(self.cdf_grid, self.x_grid, bounds_error=False, fill_value=&quot;extrapolate&quot;)
+
+        z = np.random.random(samples)
+        # converted to keV
+        return (inverse_cdf(z) * const.m_e.cgs.value 
+            * const.c.cgs.value**2 
+         * u.erg.to(u.keV))</div>
+</div>
+
 </pre></div>
 
            </div>
@@ -292,7 +357,7 @@ def sample_decay_time(
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 24 Feb 2025.
+      <span class="lastupdated">Last updated on 26 Mar 2025.
       </span></p>
   </div>
 

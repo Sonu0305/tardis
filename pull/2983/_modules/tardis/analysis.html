@@ -74,8 +74,12 @@
 <li class="toctree-l1"><a class="reference internal" href="../../io/configuration/index.html">Configuration (Required Input)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../io/model/index.html">Reading Models</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../io/optional/index.html">Optional Inputs</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../io/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../io/output/index.html">Additional Outputs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Analysing Tardis Outputs</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../analysing_tardis_outputs/visualization/index.html">Visualization Tools &amp; Widgets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../analysing_tardis_outputs/spectrum/index.html">Analyzing TARDIS Spectra</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Physics Walkthrough</span></p>
 <ul>
@@ -386,13 +390,13 @@ class LastLineInteraction:
             print(
                 &quot;Line_in&quot;
                 f&quot;({len(event.ind)}/{self.current_no_packets})&quot;
-                f&quot;:\n{self.last_line_list_in.ix[event.ind]}&quot;
+                f&quot;:\n{self.last_line_list_in.iloc[event.ind]}&quot;
             )
             print(&quot;\n\n&quot;)
             print(
                 &quot;Line_out&quot;
                 f&quot;({len(event.ind)}/{self.current_no_packets})&quot;
-                f&quot;:\n{self.last_line_list_in.ix[event.ind]}&quot;
+                f&quot;:\n{self.last_line_list_in.iloc[event.ind]}&quot;
             )
             print(&quot;^&quot; * 80)
 
@@ -457,7 +461,7 @@ class TARDISHistory:
 
         for iter in iterations:
             t_inners.append(
-                hdf_store[f&quot;model{iter:03d}/configuration&quot;].ix[&quot;t_inner&quot;]
+                hdf_store[f&quot;model{iter:03d}/configuration&quot;].iloc[&quot;t_inner&quot;]
             )
         hdf_store.close()
 
@@ -607,7 +611,7 @@ class TARDISHistory:
         t_rads = self.load_t_rads(iteration)
         beta_rads = 1 / (constants.k_B.cgs.value * t_rads.values[:, 0])
 
-        species_levels = self.levels.ix[species]
+        species_levels = self.levels.iloc[species]
 
         relative_lte_level_populations = (
             species_levels.g.values[np.newaxis].T
@@ -626,14 +630,14 @@ class TARDISHistory:
         t_rads = self.load_t_rads(iteration)
         beta_rads = 1 / (constants.k_B.cgs.value * t_rads.values[:, 0])
 
-        species_levels = self.levels.ix[species]
-        species_level_populations = self.load_level_populations(iteration).ix[
+        species_levels = self.levels.iloc[species]
+        species_level_populations = self.load_level_populations(iteration).iloc[
             species
         ]
         departure_coefficient = (
-            (species_level_populations.values * species_levels.g.ix[0])
+            (species_level_populations.values * species_levels.g.iloc[0])
             / (
-                species_level_populations.ix[0].values
+                species_level_populations.iloc[0].values
                 * species_levels.g.values[np.newaxis].T
             )
         ) * np.exp(beta_rads * species_levels.energy.values[np.newaxis].T)
@@ -684,7 +688,7 @@ class TARDISHistory:
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 24 Feb 2025.
+      <span class="lastupdated">Last updated on 26 Mar 2025.
       </span></p>
   </div>
 
