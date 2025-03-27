@@ -166,8 +166,19 @@
 <span id="tardis-workflows-v-inner-solver-module"></span><h1>tardis.workflows.v_inner_solver module<a class="headerlink" href="#module-tardis.workflows.v_inner_solver" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tardis.workflows.v_inner_solver.</span></span><span class="sig-name descname"><span class="pre">InnerVelocitySolverWorkflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_optical_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rosseland'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/v_inner_solver.html#InnerVelocitySolverWorkflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tardis.workflows.v_inner_solver.</span></span><span class="sig-name descname"><span class="pre">InnerVelocitySolverWorkflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mean_optical_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'rosseland'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">csvy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/v_inner_solver.html#InnerVelocitySolverWorkflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="tardis.workflows.simple_tardis_workflow.html#tardis.workflows.simple_tardis_workflow.SimpleTARDISWorkflow" title="tardis.workflows.simple_tardis_workflow.SimpleTARDISWorkflow"><code class="xref py py-class docutils literal notranslate"><span class="pre">SimpleTARDISWorkflow</span></code></a></p>
+<p>A simple TARDIS workflow that runs a simulation to convergence</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>configuration</strong><span class="classifier">Configuration</span></dt><dd><p>Configuration object for the simulation</p>
+</dd>
+<dt><strong>csvy</strong><span class="classifier">bool, optional</span></dt><dd><p>Set true if the configuration uses CSVY, by default False</p>
+</dd>
+</dl>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.TAU_TARGET">
 <span class="sig-name descname"><span class="pre">TAU_TARGET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">np.float64(-0.40546510810816444)</span></em><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.TAU_TARGET" title="Link to this definition">¶</a></dt>
@@ -204,17 +215,11 @@ Extrapolate with exponential fits</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.get_convergence_estimates">
-<span class="sig-name descname"><span class="pre">get_convergence_estimates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">transport_state</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/v_inner_solver.html#InnerVelocitySolverWorkflow.get_convergence_estimates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.get_convergence_estimates" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_convergence_estimates</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/v_inner_solver.html#InnerVelocitySolverWorkflow.get_convergence_estimates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.get_convergence_estimates" title="Link to this definition">¶</a></dt>
 <dd><p>Compute convergence estimates from the transport state</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
-<dt><strong>transport_state</strong><span class="classifier">MonteCarloTransportState</span></dt><dd><p>Transport state object to compute estimates</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
 <dt>dict</dt><dd><p>Convergence estimates</p>
 </dd>
 <dt>EstimatedRadiationFieldProperties</dt><dd><p>Dilute radiation file and j_blues dataclass</p>
@@ -274,6 +279,21 @@ a2* = A2[mask_two][mask_one[mask_two]] = a2[mask_one[mask_two]]</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.reshape_store_plasma_state">
+<span class="sig-name descname"><span class="pre">reshape_store_plasma_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executed_iterations</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/v_inner_solver.html#InnerVelocitySolverWorkflow.reshape_store_plasma_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.reshape_store_plasma_state" title="Link to this definition">¶</a></dt>
+<dd><p>Reshapes the storage arrays in case convergence was reached before
+all specified iterations were executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>executed_iterations</strong><span class="classifier">int</span></dt><dd><p>iteration index, i.e. number of iterations executed minus one!</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/v_inner_solver.html#InnerVelocitySolverWorkflow.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.run" title="Link to this definition">¶</a></dt>
 <dd><p>Run the TARDIS simulation until convergence is reached</p>
@@ -316,6 +336,37 @@ iteration estimates.</p>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><dl class="simple">
 <dt><strong>next_values</strong><span class="classifier">dict</span></dt><dd><p>The next values assigned to the simulation state</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.store_plasma_state">
+<span class="sig-name descname"><span class="pre">store_plasma_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_active_shells</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_radiative</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dilution_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electron_densities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_inner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_inner_boundary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_integ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/v_inner_solver.html#InnerVelocitySolverWorkflow.store_plasma_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.store_plasma_state" title="Link to this definition">¶</a></dt>
+<dd><p>Store current plasma information,
+including the velocity of the inner boundary
+and the Rosseland mean optical depth,
+used in iterated i.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>i</strong><span class="classifier">int</span></dt><dd><p>current iteration index (0 for the first)</p>
+</dd>
+<dt><strong>num_active_shells</strong><span class="classifier">int</span></dt><dd><p>number of active shells</p>
+</dd>
+<dt><strong>t_rad</strong><span class="classifier">astropy.units.Quantity</span></dt><dd><p>radiation temperature</p>
+</dd>
+<dt><strong>dilution_factor</strong><span class="classifier">np.ndarray</span></dt><dd><p>dilution factor</p>
+</dd>
+<dt><strong>electron_densities</strong><span class="classifier">np.ndarray</span></dt><dd><p>electron density</p>
+</dd>
+<dt><strong>t_inner</strong><span class="classifier">astropy.units.Quantity</span></dt><dd><p>temperature of inner boundary</p>
+</dd>
+<dt><strong>v_inner_boundary</strong><span class="classifier">astropy.units.Quantity</span></dt><dd><p>velocity of inner boundary</p>
+</dd>
+<dt><strong>tau_integ</strong><span class="classifier">np.ndarray</span></dt><dd><p>Rosseland mean optical depth</p>
 </dd>
 </dl>
 </dd>
