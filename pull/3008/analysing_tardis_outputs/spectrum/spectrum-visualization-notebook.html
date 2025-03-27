@@ -192,6 +192,15 @@
 <p class="note-p">You can interact with this notebook online: <a href="https://mybinder.org/v2/gh/tardis-sn/tardis/HEAD?filepath=docs/analysing_tardis_outputs/spectrum/spectrum-visualization-notebook.ipynb" class="launch-btn" target="_blank" rel="noopener noreferrer">Launch notebook</a></p>
 </div><section id="Analysing-Spectrum">
 <h1>Analysing Spectrum<a class="headerlink" href="#Analysing-Spectrum" title="Link to this heading">¶</a></h1>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tardis.visualization</span> <span class="kn">import</span> <span class="n">plot_util</span> <span class="k">as</span> <span class="n">pu</span>
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+</pre></div>
+</div>
+</div>
 <p>Every simulation run requires <a class="reference external" href="io/configuration/components/atomic/atomic_data.rst">atomic data</a> and a <a class="reference external" href="io/configuration/index.rst">configuration file</a>.</p>
 <section id="Atomic-Data">
 <h2>Atomic Data<a class="headerlink" href="#Atomic-Data" title="Link to this heading">¶</a></h2>
@@ -303,11 +312,15 @@
 
 <span class="n">spectrum_integrated</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Formal integral&quot;</span><span class="p">)</span>  <span class="c1"># Plot spectrum from formal integral solution</span>
 
+<span class="n">xlabel</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">axis_label_in_latex</span><span class="p">(</span><span class="s2">&quot;Wavelength&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">)</span>
+<span class="n">ylabel</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">axis_label_in_latex</span><span class="p">(</span>
+    <span class="s2">&quot;Luminosity density&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s AA)&quot;</span><span class="p">),</span> <span class="n">only_text</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
 <span class="c1"># Set title, labels, and template</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">9000</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;TARDIS example model spectrum&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Wavelength [$\AA$]&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Luminosity density [$erg\;s^{-1}\;\AA^{-1}$]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <br/></pre></div>
@@ -336,11 +349,15 @@
     <span class="p">)</span>
 <span class="p">)</span>
 
+<span class="n">xlabel</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">axis_label_in_latex</span><span class="p">(</span><span class="s2">&quot;Wavelength&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">)</span>
+<span class="n">ylabel</span> <span class="o">=</span> <span class="n">pu</span><span class="o">.</span><span class="n">axis_label_in_latex</span><span class="p">(</span>
+    <span class="s2">&quot;Luminosity density&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s AA)&quot;</span><span class="p">),</span> <span class="n">only_text</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
 <span class="c1"># Set title, labels, and template</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;TARDIS example model spectrum&quot;</span><span class="p">,</span>
-    <span class="n">xaxis_title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$ \text{Wavelength } [\overset{\circ}</span><span class="si">{A}</span><span class="s2">]$&quot;</span><span class="p">,</span>
-    <span class="n">yaxis_title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$ \text{Luminosity density } [erg\;s^{-1}\;\overset{\circ}{A^{-1}}]$&quot;</span><span class="p">,</span> <span class="c1"># Plotly doesnot support the Angstrom symbol so we are using a close approximation of it</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="n">xlabel</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="n">ylabel</span><span class="p">,</span>
     <span class="n">xaxis_range</span><span class="o">=</span><span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="mi">9000</span><span class="p">],</span>
     <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">template</span><span class="o">=</span><span class="s2">&quot;plotly_white&quot;</span>
@@ -375,7 +392,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 25 Mar 2025.
+      <span class="lastupdated">Last updated on 27 Mar 2025.
       </span></p>
   </div>
 
