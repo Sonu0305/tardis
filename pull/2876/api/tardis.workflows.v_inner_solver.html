@@ -278,6 +278,21 @@ a2* = A2[mask_two][mask_one[mask_two]] = a2[mask_one[mask_two]]</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.reshape_store_plasma_state">
+<span class="sig-name descname"><span class="pre">reshape_store_plasma_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">executed_iterations</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/v_inner_solver.html#InnerVelocitySolverWorkflow.reshape_store_plasma_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.reshape_store_plasma_state" title="Link to this definition">¶</a></dt>
+<dd><p>Reshapes the storage arrays in case convergence was reached before
+all specified iterations were executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>executed_iterations</strong><span class="classifier">int</span></dt><dd><p>iteration index, i.e. number of iterations executed minus one!</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.run">
 <span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/v_inner_solver.html#InnerVelocitySolverWorkflow.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.run" title="Link to this definition">¶</a></dt>
 <dd><p>Run the TARDIS simulation until convergence is reached</p>
@@ -326,6 +341,37 @@ iteration estimates.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.store_plasma_state">
+<span class="sig-name descname"><span class="pre">store_plasma_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_active_shells</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_radiative</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dilution_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">electron_densities</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_inner</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v_inner_boundary</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tau_integ</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tardis/workflows/v_inner_solver.html#InnerVelocitySolverWorkflow.store_plasma_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tardis.workflows.v_inner_solver.InnerVelocitySolverWorkflow.store_plasma_state" title="Link to this definition">¶</a></dt>
+<dd><p>Store current plasma information,
+including the velocity of the inner boundary
+and the Rosseland mean optical depth,
+used in iterated i.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>i</strong><span class="classifier">int</span></dt><dd><p>current iteration index (0 for the first)</p>
+</dd>
+<dt><strong>num_active_shells</strong><span class="classifier">int</span></dt><dd><p>number of active shells</p>
+</dd>
+<dt><strong>t_rad</strong><span class="classifier">astropy.units.Quantity</span></dt><dd><p>radiation temperature</p>
+</dd>
+<dt><strong>dilution_factor</strong><span class="classifier">np.ndarray</span></dt><dd><p>dilution factor</p>
+</dd>
+<dt><strong>electron_densities</strong><span class="classifier">np.ndarray</span></dt><dd><p>electron density</p>
+</dd>
+<dt><strong>t_inner</strong><span class="classifier">astropy.units.Quantity</span></dt><dd><p>temperature of inner boundary</p>
+</dd>
+<dt><strong>v_inner_boundary</strong><span class="classifier">astropy.units.Quantity</span></dt><dd><p>velocity of inner boundary</p>
+</dd>
+<dt><strong>tau_integ</strong><span class="classifier">np.ndarray</span></dt><dd><p>Rosseland mean optical depth</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -342,7 +388,7 @@ iteration estimates.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 19 Mar 2025.
+      <span class="lastupdated">Last updated on 27 Mar 2025.
       </span></p>
   </div>
 
