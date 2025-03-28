@@ -174,9 +174,7 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {
-    "nbsphinx": "hidden"
-   },
+   "metadata": {},
    "outputs": [],
    "source": [
     "sim.convergence_plots.plasma_plot.show(renderer=\"notebook_connected\")"
@@ -185,9 +183,7 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {
-    "nbsphinx": "hidden"
-   },
+   "metadata": {},
    "outputs": [],
    "source": [
     "sim.convergence_plots.t_inner_luminosities_plot.show(renderer=\"notebook_connected\")"
