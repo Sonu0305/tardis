@@ -174,9 +174,24 @@
   {
    "cell_type": "code",
    "execution_count": null,
-   "metadata": {},
+   "metadata": {
+    "nbsphinx": "hidden"
+   },
    "outputs": [],
-   "source": []
+   "source": [
+    "sim.convergence_plots.plasma_plot.show(renderer=\"notebook_connected\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "nbsphinx": "hidden"
+   },
+   "outputs": [],
+   "source": [
+    "sim.convergence_plots.t_inner_luminosities_plot.show(renderer=\"notebook_connected\")"
+   ]
   }
  ],
  "metadata": {
