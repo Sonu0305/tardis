@@ -293,9 +293,9 @@ data display, interaction, and optional column name changes.</p>
 <dd class="field-odd"><dl class="simple">
 <dt><strong>data</strong><span class="classifier">pandas.DataFrame</span></dt><dd><p>Data you want to display in table widget</p>
 </dd>
-<dt><strong>col_widths</strong><span class="classifier">list</span></dt><dd><p>A list containing width of each column of data in order (including
-the index as 1st column). The width values must be proportions of
-100 i.e. they must sum to 100.</p>
+<dt><strong>col_widths</strong><span class="classifier">list</span></dt><dd><p>A list containing the desired widths of each column of data in order (including
+the index as 1st column). The widths can be any non-negative numbers, and they
+will be normalized to sum to 100 for setting the column widths.</p>
 </dd>
 <dt><strong>table_options</strong><span class="classifier">dict, optional</span></dt><dd><p>A dictionary specifying configuration options for the Tabulator widget.
 Overrides the default options where applicable.</p>
@@ -316,7 +316,7 @@ the data updates. It must contain two keys:
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
 <dt>ValueError</dt><dd><p>If the length of <code class="code docutils literal notranslate"><span class="pre">col_widths</span></code> does not match the number of
-columns + 1 (for the index), or if the column widths do not sum to 100.</p>
+columns + 1 (for the index), or if any column width is negative.</p>
 </dd>
 <dt>ValueError</dt><dd><p>If <code class="code docutils literal notranslate"><span class="pre">changeable_col</span></code> does not contain both ‘index’ and ‘other_names’ keys.</p>
 </dd>
@@ -363,7 +363,7 @@ please see <a class="reference external" href="https://ipywidgets.readthedocs.io
 
   <div role="contentinfo">
     <p>&#169; Copyright 2013-2025, TARDIS Collaboration.
-      <span class="lastupdated">Last updated on 27 Mar 2025.
+      <span class="lastupdated">Last updated on 28 Mar 2025.
       </span></p>
   </div>
 
