@@ -1,5 +1,9 @@
 .. _embed: 
 
+************************
+Embedded ShellInfoWidget
+************************
+
 .. .. pyodide::
 ..     from pyodide.http import pyfetch
 ..     import pandas as pd
