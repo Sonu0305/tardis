@@ -36,7 +36,7 @@ async function loadApplication(cell_id, path) {
   self.pyodide.globals.set("sendStderr", sendStderr);
   console.log("Loaded!");
   await self.pyodide.loadPackage("micropip");
-  const packages = ['panel'];
+  const packages = ['panel', 'h5py'];
   if (path != null) {
     for (const key of Object.keys(REQUIRES)) {
       if (path.replace('.html', '').endsWith(key.replace('.md', ''))) {
