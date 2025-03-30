@@ -3,5 +3,5 @@ tardis.io.logger.logger module
 
 .. automodule:: tardis.io.logger.logger
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

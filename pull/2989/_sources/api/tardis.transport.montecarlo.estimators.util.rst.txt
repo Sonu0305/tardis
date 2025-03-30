@@ -3,5 +3,5 @@ tardis.transport.montecarlo.estimators.util module
 
 .. automodule:: tardis.transport.montecarlo.estimators.util
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

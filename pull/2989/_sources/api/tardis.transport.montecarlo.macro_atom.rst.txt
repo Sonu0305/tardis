@@ -3,5 +3,5 @@ tardis.transport.montecarlo.macro\_atom module
 
 .. automodule:: tardis.transport.montecarlo.macro_atom
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

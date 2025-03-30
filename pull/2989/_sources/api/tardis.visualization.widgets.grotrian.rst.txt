@@ -3,5 +3,5 @@ tardis.visualization.widgets.grotrian module
 
 .. automodule:: tardis.visualization.widgets.grotrian
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

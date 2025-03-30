@@ -3,5 +3,5 @@ tardis.workflows.workflow\_logging module
 
 .. automodule:: tardis.workflows.workflow_logging
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

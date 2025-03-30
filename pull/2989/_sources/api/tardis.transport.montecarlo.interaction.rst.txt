@@ -3,5 +3,5 @@ tardis.transport.montecarlo.interaction module
 
 .. automodule:: tardis.transport.montecarlo.interaction
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

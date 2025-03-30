@@ -16,5 +16,5 @@ Module contents
 
 .. automodule:: tardis.io.logger
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

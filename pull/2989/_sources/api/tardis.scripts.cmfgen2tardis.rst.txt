@@ -3,5 +3,5 @@ tardis.scripts.cmfgen2tardis module
 
 .. automodule:: tardis.scripts.cmfgen2tardis
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

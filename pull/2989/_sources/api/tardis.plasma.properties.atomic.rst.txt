@@ -3,5 +3,5 @@ tardis.plasma.properties.atomic module
 
 .. automodule:: tardis.plasma.properties.atomic
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

@@ -3,5 +3,5 @@ tardis.plasma.equilibrium.level\_populations module
 
 .. automodule:: tardis.plasma.equilibrium.level_populations
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

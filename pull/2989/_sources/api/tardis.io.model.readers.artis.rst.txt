@@ -3,5 +3,5 @@ tardis.io.model.readers.artis module
 
 .. automodule:: tardis.io.model.readers.artis
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

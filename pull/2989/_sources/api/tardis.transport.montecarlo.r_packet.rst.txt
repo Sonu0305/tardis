@@ -3,5 +3,5 @@ tardis.transport.montecarlo.r\_packet module
 
 .. automodule:: tardis.transport.montecarlo.r_packet
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

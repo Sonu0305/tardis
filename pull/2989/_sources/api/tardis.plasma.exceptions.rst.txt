@@ -3,5 +3,5 @@ tardis.plasma.exceptions module
 
 .. automodule:: tardis.plasma.exceptions
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

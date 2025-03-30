@@ -14,5 +14,5 @@ Module contents
 
 .. automodule:: tardis.scripts
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

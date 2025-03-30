@@ -3,5 +3,5 @@ tardis.opacities.opacities module
 
 .. automodule:: tardis.opacities.opacities
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

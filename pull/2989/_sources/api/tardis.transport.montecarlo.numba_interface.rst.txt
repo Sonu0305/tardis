@@ -3,5 +3,5 @@ tardis.transport.montecarlo.numba\_interface module
 
 .. automodule:: tardis.transport.montecarlo.numba_interface
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

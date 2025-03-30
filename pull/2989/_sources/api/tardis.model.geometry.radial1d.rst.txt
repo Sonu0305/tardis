@@ -3,5 +3,5 @@ tardis.model.geometry.radial1d module
 
 .. automodule:: tardis.model.geometry.radial1d
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

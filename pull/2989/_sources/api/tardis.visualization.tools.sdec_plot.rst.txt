@@ -3,5 +3,5 @@ tardis.visualization.tools.sdec\_plot module
 
 .. automodule:: tardis.visualization.tools.sdec_plot
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

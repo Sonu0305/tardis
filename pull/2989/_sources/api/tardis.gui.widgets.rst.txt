@@ -3,5 +3,5 @@ tardis.gui.widgets module
 
 .. automodule:: tardis.gui.widgets
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

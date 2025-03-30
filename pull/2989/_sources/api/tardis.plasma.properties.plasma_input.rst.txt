@@ -3,5 +3,5 @@ tardis.plasma.properties.plasma\_input module
 
 .. automodule:: tardis.plasma.properties.plasma_input
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

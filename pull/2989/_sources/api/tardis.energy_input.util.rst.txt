@@ -3,5 +3,5 @@ tardis.energy\_input.util module
 
 .. automodule:: tardis.energy_input.util
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

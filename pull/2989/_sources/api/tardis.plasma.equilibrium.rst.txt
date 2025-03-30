@@ -23,5 +23,5 @@ Module contents
 
 .. automodule:: tardis.plasma.equilibrium
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

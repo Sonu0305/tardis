@@ -3,5 +3,5 @@ tardis.transport.montecarlo.base module
 
 .. automodule:: tardis.transport.montecarlo.base
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

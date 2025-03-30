@@ -3,5 +3,5 @@ tardis.plasma.properties.general module
 
 .. automodule:: tardis.plasma.properties.general
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

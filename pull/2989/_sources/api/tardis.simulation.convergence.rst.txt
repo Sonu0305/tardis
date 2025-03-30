@@ -3,5 +3,5 @@ tardis.simulation.convergence module
 
 .. automodule:: tardis.simulation.convergence
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

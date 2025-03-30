@@ -3,5 +3,5 @@ tardis.analysis module
 
 .. automodule:: tardis.analysis
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

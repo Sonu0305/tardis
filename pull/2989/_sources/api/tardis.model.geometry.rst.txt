@@ -14,5 +14,5 @@ Module contents
 
 .. automodule:: tardis.model.geometry
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:

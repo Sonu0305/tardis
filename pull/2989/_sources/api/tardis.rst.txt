@@ -38,5 +38,5 @@ Module contents
 
 .. automodule:: tardis
    :members:
-   :show-inheritance:
    :undoc-members:
+   :show-inheritance:
