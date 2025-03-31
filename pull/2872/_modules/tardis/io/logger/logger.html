@@ -135,6 +135,7 @@ from dataclasses import dataclass, field
 import panel as pn
 from IPython.display import display
 from functools import lru_cache
+import pandas as pd
 
 PYTHON_WARNINGS_LOGGER = logging.getLogger(&quot;py.warnings&quot;)
 
@@ -228,17 +229,22 @@ class AsyncEmitLogHandler(logging.Handler):
 <div class="viewcode-block" id="AsyncEmitLogHandler.emit">
 <a class="viewcode-back" href="../../../../api/tardis.io.logger.logger.html#tardis.io.logger.logger.AsyncEmitLogHandler.emit">[docs]</a>
     def emit(self, record):
-        # Handle standard environment with simple stream output
         if not self.display_widget or self.display_handle is None:
             stream_handler = logging.StreamHandler()
             stream_handler.setFormatter(logging.Formatter(&quot;%(name)s [%(levelname)s] %(message)s (%(filename)s:%(lineno)d)&quot;))
             stream_handler.emit(record)
             return
 
-        # Process and emit log directly
-        log_entry = self.format(record)
-        clean_log_entry = self._remove_ansi_escape_sequences(log_entry)
-        html_output = self._format_html_output(clean_log_entry, record)
+        if isinstance(record.msg, pd.DataFrame):
+            html_output = record.msg.to_html(
+                border=0.1,
+            )
+
+        else:
+            log_entry = self.format(record)
+            clean_log_entry = self._remove_ansi_escape_sequences(log_entry)
+            html_output = self._format_html_output(clean_log_entry, record)
+            
         self._emit_to_widget(record.levelno, html_output)</div>
 
 
